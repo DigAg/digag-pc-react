@@ -86,6 +86,14 @@
   margin: 0 .4rem;
 }
 
+.register-dialog {
+  padding: 2rem;
+  width: 26.5rem !important;
+  max-width: 100%;
+  font-size: 1.167rem;
+  box-sizing: border-box;
+}
+
 .App-body {
   position: relative;
   margin: 0 auto;

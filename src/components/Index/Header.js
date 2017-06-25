@@ -2,7 +2,8 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, { Component } from 'react';
-import {Button, Dialog, Input, Menu} from "element-react";
+import {Button, Input, Menu} from "element-react";
+import RegisterDialog from "./RegisterDialog";
 
 export default class Header extends Component {
 
@@ -16,11 +17,17 @@ export default class Header extends Component {
 
   handleSelect = (index) => {
     console.log(index);
-  }
+  };
 
   handleIconClick = () => {
     console.log('handleIconClick', this.state.searchInput);
-  }
+  };
+
+  handleRegisterDialogClose = () => {
+    return () => {
+      this.setState({registerDialog: false});
+    }
+  };
 
   render(){
     return(
@@ -55,6 +62,7 @@ export default class Header extends Component {
             </Menu>
           </div>
         </div>
+        <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}/>
       </header>
     )
   }
