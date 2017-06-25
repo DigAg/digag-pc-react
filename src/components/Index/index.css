@@ -34,6 +34,7 @@
 
 .main-header .container {
   max-width: 960px;
+  min-width: 960px;
   margin: auto;
 }
 
@@ -43,6 +44,46 @@
 
 .logo-img {
   border-style: none;
+}
+
+.nav-menu ul{
+  background-color: white;
+}
+
+.nav-menu ul li{
+  font-size: 1.33rem;
+}
+
+.nav-menu ul li:hover{
+  border-bottom: 0 solid white !important;
+  background-color: white !important;
+}
+
+.nav-menu button{
+  margin-left: 0 !important;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.contribute {
+
+}
+
+.contribute:after{
+  content: "|";
+  position: absolute;
+  top: 24px;
+  left: 100%;
+  color: hsla(0,0%,59%,.4);
+}
+
+.login-btn {
+
+}
+
+.login-btn:after {
+  content: "\B7";
+  margin: 0 .4rem;
 }
 
 .App-body {
