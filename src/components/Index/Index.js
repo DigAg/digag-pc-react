@@ -4,8 +4,15 @@
 import React, { Component } from 'react';
 import './index.css';
 import Header from "./Header";
+import {testAction} from '../../redux/action/users';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
-export default class Index extends Component {
+class Index extends Component {
+
+  componentDidMount() {
+    console.log(this.props.users)
+  }
 
   render(){
     return(
@@ -16,7 +23,10 @@ export default class Index extends Component {
         <div className="App-body">
           <div className="welcome-view">
             <div className="category-nav">
-              1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd
+              <button onClick={() => this.props.testActions(!this.props.users.get('visible'))}>哈哈啊</button>
+              {this.props.users.get('visible') &&
+                <div>1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd</div>
+              }
             </div>
             <div className="main">
               21adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd
@@ -30,3 +40,13 @@ export default class Index extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    testActions: bindActionCreators(testAction, dispatch)
+  };
+}
+
+export default connect((state) => {
+  return { users: state.users }
+}, mapDispatchToProps)(Index);
