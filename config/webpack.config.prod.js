@@ -70,7 +70,7 @@ module.exports = {
       path.relative(paths.appSrc, info.absoluteResourcePath),
   },
   resolve: {
-    // This allows you to set a fallback for where Webpack should look for modules.
+    // This allows you to set a fallback for where Webpack should look for redex.
     // We placed these paths second because we want `node_modules` to "win"
     // if there are any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
@@ -165,7 +165,7 @@ module.exports = {
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader normally turns CSS into JS modules injecting <style>,
+      // "style" loader normally turns CSS into JS redex injecting <style>,
       // but unlike in development configuration, we do something different.
       // `ExtractTextPlugin` first applies the "postcss" and "css" loaders
       // (second argument), then grabs the result CSS and puts it into a
@@ -307,7 +307,7 @@ module.exports = {
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
-  // Some libraries import Node modules but don't use them in the browser.
+  // Some libraries import Node redex but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
   node: {
     fs: 'empty',
