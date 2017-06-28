@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import './index.css';
 import Header from "./Header";
-import {testAction} from '../../redux/action/users';
+import {testAction, registerAction} from '../../redux/action/users';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
@@ -23,7 +23,14 @@ class Index extends Component {
         <div className="App-body">
           <div className="welcome-view">
             <div className="category-nav">
-              <button onClick={() => this.props.testActions(!this.props.users.get('visible'))}>哈哈啊</button>
+              <button onClick={() => this.props.testActions(
+                {
+                  "email": "string3",
+                  "lastPasswordResetDate": "2017-06-28T15:22:05.205Z",
+                  "password": "string",
+                  "username": "string3"
+                }
+              )}>哈哈啊</button>
               {this.props.users.get('visible') &&
                 <div>1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd</div>
               }
@@ -43,7 +50,8 @@ class Index extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    testActions: bindActionCreators(testAction, dispatch)
+    testActions: bindActionCreators(testAction, dispatch),
+    registerActions: bindActionCreators(registerAction, dispatch)
   };
 }
 
