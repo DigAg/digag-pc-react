@@ -3,18 +3,11 @@
  */
 
 export const REGISTER_USER = 'REGISTER_USER';
-export const INCREMENT_ASYNC = 'INCREMENT_ASYNC';
 
-export const registerAction = (data) => {
+export const registerAction = (user) => {
   return{
     type:REGISTER_USER,
-    data,
+    data: user,
   }
-}
+};
 
-export const testAction = (data) => {
-  return{
-    type:INCREMENT_ASYNC,
-    data,
-  }
-}

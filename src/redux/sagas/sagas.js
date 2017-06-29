@@ -1,19 +1,21 @@
 /**
  * Created by Yuicon on 2017/6/28.
  */
-import {put, select} from 'redux-saga/effects';
+import {select} from 'redux-saga/effects';
 import {takeEvery} from 'redux-saga';
 import {getUsers} from './selectors';
-import {INCREMENT_ASYNC} from '../action/users';
+import {REGISTER_USER} from '../action/users';
 import 'whatwg-fetch';
+
+const getURL = (url) => `http://139.224.135.86:8080/${url}`;
 
 function* registerUserAsync() {
   const users = yield select(getUsers);
-  const user = users.get('user')
+  const user = users.get('user');
   console.log('visible', users.get('visible'));
   console.log('user', users.get('user'));
 
-  fetch('http://139.224.135.86:8080/auth/register', {
+  fetch(getURL("auth/register"), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -22,10 +24,8 @@ function* registerUserAsync() {
   }).then(response => response.json())
     .then(json => console.log('parsed json', json))
     .catch(ex => console.log('parsing failed', ex));
-
-  yield put({type: 'REGISTER_USER', data: !users.get('visible')});
 }
 
 export function* watchRegisterUserAsync() {
-  yield* takeEvery(INCREMENT_ASYNC, registerUserAsync);
+  yield* takeEvery(REGISTER_USER, registerUserAsync);
 }

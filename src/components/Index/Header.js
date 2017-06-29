@@ -12,7 +12,7 @@ export default class Header extends Component {
     this.state = {
       searchInput: '',
       registerDialog: false,
-    }
+    };
   }
 
   handleSelect = (index) => {
@@ -62,7 +62,9 @@ export default class Header extends Component {
             </Menu>
           </div>
         </div>
-        <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}/>
+        <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}
+                        registerActions={this.props.registerActions}
+        />
       </header>
     )
   }
