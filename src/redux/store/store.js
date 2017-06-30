@@ -5,15 +5,15 @@ import {createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import * as reducer from '../reducer/users';
 
-import { watchRegisterUserAsync } from '../sagas/sagas';
+import rootSaga from '../sagas/sagas';
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   combineReducers(reducer),
   applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(watchRegisterUserAsync)
+sagaMiddleware.run(rootSaga);
 
 export default store;

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import './App.css';
-import {registerAction} from '../../redux/action/users';
+import {registerAction, loginAction} from '../../redux/action/users';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Header from "../../components/Index/Header";
@@ -18,7 +18,7 @@ class App extends Component {
     return(
       <div className="App">
         <div className="App-header">
-          <Header registerActions={this.props.registerActions}/>
+          <Header registerActions={this.props.registerActions} loginActions={this.props.loginActions}/>
         </div>
         <div className="App-body">
           <div className="welcome-view">
@@ -44,6 +44,7 @@ export default connect(
 },
   (dispatch) => {
   return {
-    registerActions: bindActionCreators(registerAction, dispatch)
+    registerActions: bindActionCreators(registerAction, dispatch),
+    loginActions: bindActionCreators(loginAction, dispatch),
   }
 })(App);

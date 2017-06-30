@@ -1,17 +1,19 @@
 /**
  * Created by Yuicon on 2017/6/25.
  */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Button, Input, Menu} from "element-react";
 import RegisterDialog from "./RegisterDialog";
+import LoginDialog from "./LoginDialog";
 
 export default class Header extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       searchInput: '',
       registerDialog: false,
+      loginDialog: false,
     };
   }
 
@@ -29,8 +31,14 @@ export default class Header extends Component {
     }
   };
 
-  render(){
-    return(
+  handleLoginDialogClose = () => {
+    return () => {
+      this.setState({loginDialog: false});
+    }
+  };
+
+  render() {
+    return (
       <header className="main-header visible">
         <div className="container">
           <a href="/" className="logo">
@@ -49,21 +57,25 @@ export default class Header extends Component {
                   icon="search"
                   placeholder="搜索掘金"
                   onIconClick={this.handleIconClick}
-                  onChange={(value) => this.setState({searchInput:value})}
+                  onChange={(value) => this.setState({searchInput: value})}
                 />
               </Menu.Item>
               <Menu.Item index="7">
                 <Button type="text" icon="edit" className="contribute">投稿</Button>
               </Menu.Item>
               <Menu.Item index="8">
-                <Button type="text" className="login-btn">登录</Button>
-                <Button type="text" onClick={ () => this.setState({ registerDialog: true }) }>注册</Button>
+                <Button type="text" className="login-btn"
+                        onClick={ () => this.setState({loginDialog: true}) }>登录</Button>
+                <Button type="text" onClick={ () => this.setState({registerDialog: true}) }>注册</Button>
               </Menu.Item>
             </Menu>
           </div>
         </div>
         <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}
                         registerActions={this.props.registerActions}
+        />
+        <LoginDialog visible={this.state.loginDialog} onClose={this.handleLoginDialogClose()}
+                     loginActions={this.props.loginActions}
         />
       </header>
     )
