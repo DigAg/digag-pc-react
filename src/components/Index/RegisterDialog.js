@@ -11,7 +11,7 @@ export default class RegisterDialog extends Component {
     this.state = {
       user: {
         username: '',
-        email: '',
+        account: '',
         password: '',
       }
     };
@@ -54,11 +54,11 @@ export default class RegisterDialog extends Component {
               <Input value={this.state.user.username} placeholder="请输入用户名"
                      onChange={this.handleChange.bind(this, 'username')}/>
             </Form.Item>
-            <Form.Item required={true} prop="email"
+            <Form.Item required={true} prop="account"
                        rules={{type: 'email', required: true, message: '邮箱不能为空或格式不正确', trigger: 'blur'}}
             >
-              <Input value={this.state.user.email} placeholder="请填写邮箱"
-                     onChange={this.handleChange.bind(this, 'email')}/>
+              <Input value={this.state.user.account} placeholder="请填写邮箱"
+                     onChange={this.handleChange.bind(this, 'account')}/>
             </Form.Item>
             <Form.Item required={true} prop="password"
                        rules={{required: true, message: '密码不能为空', trigger: 'blur'}}

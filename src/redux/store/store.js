@@ -1,16 +1,16 @@
 /**
  * Created by Yuicon on 2017/6/27.
  */
-import {createStore, combineReducers, applyMiddleware } from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga'
-import * as reducer from '../reducer/users';
+import digagReducer from '../reducer/reducer';
 
 import rootSaga from '../sagas/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  combineReducers(reducer),
+  digagReducer,
   applyMiddleware(sagaMiddleware)
 );
 
