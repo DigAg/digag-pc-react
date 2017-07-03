@@ -17,6 +17,7 @@ export default class LoginDialog extends Component {
   }
 
   handleSubmit = (e) => {
+    console.log('submit!', this.state.user);
     e.preventDefault();
 
     this.refs.user.validate((valid) => {
