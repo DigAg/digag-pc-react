@@ -34,4 +34,3 @@ export const loginFailureAction = (error) => {
     data: error,
   }
 };
-
