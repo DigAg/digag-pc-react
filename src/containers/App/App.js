@@ -18,7 +18,8 @@ class App extends Component {
     return(
       <div className="App">
         <div className="App-header">
-          <Header registerActions={this.props.registerActions} loginActions={this.props.loginActions}/>
+          <Header registerActions={this.props.registerActions} loginActions={this.props.loginActions}
+                  auth={this.props.auth}/>
         </div>
         <div className="App-body">
           <div className="welcome-view">
@@ -40,7 +41,11 @@ class App extends Component {
 
 export default connect(
   (state) => {
-  return { users: state.users }
+    console.log('state', state);
+    return {
+      users: state.users,
+      auth: state.auth
+    }
 },
   (dispatch) => {
   return {
