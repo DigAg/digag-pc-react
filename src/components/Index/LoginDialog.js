@@ -2,7 +2,7 @@
  * Created by Yuicon on 2017/6/30.
  */
 import React, {Component} from 'react';
-import {Button, Dialog, Form, Input} from "element-react";
+import {Button, Dialog, Form, Input, Notification} from "element-react";
 
 export default class LoginDialog extends Component {
 
@@ -12,8 +12,30 @@ export default class LoginDialog extends Component {
       user: {
         username: '',
         password: '',
-      }
+      },
+      loading: false,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps);
+    if (nextProps.auth.get('token') && this.props.visible) {
+      this.props.onClose();
+      Notification.success({
+        title: '成功',
+        message: '登陆成功',
+        duration: 1500
+      });
+      this.setState({loading: false});
+    } else if (nextProps.auth.get('error') && this.props.visible) {
+      Notification.error({
+        title: '错误',
+        message: nextProps.auth.get('error'),
+        type: 'success',
+        duration: 1500
+      });
+      this.setState({loading: false});
+    }
   }
 
   handleSubmit = (e) => {
@@ -23,12 +45,12 @@ export default class LoginDialog extends Component {
     this.refs.user.validate((valid) => {
       if (valid) {
         this.props.loginActions(this.state.user);
+        this.setState({loading: true});
       }
     });
   };
 
   handleChange = (key, value) => {
-    console.log(`${key}`, value);
     this.setState({
       user: Object.assign(this.state.user, {[key]: value})
     });
@@ -60,7 +82,7 @@ export default class LoginDialog extends Component {
                      onChange={this.handleChange.bind(this, 'password')}/>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" onClick={this.handleSubmit}>
+              <Button type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
                 登录
               </Button>
             </Form.Item>

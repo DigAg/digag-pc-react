@@ -2,8 +2,7 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, {Component} from 'react';
-import {Button, Dialog, Form, Input} from "element-react";
-
+import {Button, Dialog, Form, Input, Notification} from "element-react";
 export default class RegisterDialog extends Component {
 
   constructor(props) {
@@ -13,8 +12,30 @@ export default class RegisterDialog extends Component {
         username: '',
         email: '',
         password: '',
-      }
+      },
+      loading: false,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps);
+    if (nextProps.users.get('saveSuccess') && this.props.visible) {
+      Notification.success({
+        title: '成功',
+        message: '注册成功',
+        duration: 1500
+      });
+      this.props.onClose();
+      this.setState({loading: false});
+    } else if (nextProps.users.get('error') && this.props.visible) {
+      Notification.error({
+        title: '错误',
+        message: nextProps.users.get('error'),
+        type: 'success',
+        duration: 1500
+      });
+      this.setState({loading: false});
+    }
   }
 
   handleSubmit = (e) => {
@@ -24,12 +45,12 @@ export default class RegisterDialog extends Component {
     this.refs.user.validate((valid) => {
       if (valid) {
         this.props.registerActions(this.state.user);
+        this.setState({loading: true});
       }
     });
   };
 
   handleChange = (key, value) => {
-    console.log(`${key}`, value);
     this.setState({
       user: Object.assign(this.state.user, {[key]: value})
     });
@@ -67,7 +88,7 @@ export default class RegisterDialog extends Component {
                      onChange={this.handleChange.bind(this, 'password')}/>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" onClick={this.handleSubmit}>
+              <Button type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
                 注册
               </Button>
             </Form.Item>

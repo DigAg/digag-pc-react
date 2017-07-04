@@ -3,6 +3,10 @@
  */
 import React, {Component} from 'react';
 import {Button, Input, Menu} from "element-react";
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 import RegisterDialog from "./RegisterDialog";
 import LoginDialog from "./LoginDialog";
 
@@ -72,10 +76,10 @@ export default class Header extends Component {
           </div>
         </div>
         <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}
-                        registerActions={this.props.registerActions}
+                        registerActions={this.props.registerActions} users={this.props.users}
         />
         <LoginDialog visible={this.state.loginDialog} onClose={this.handleLoginDialogClose()}
-                     loginActions={this.props.loginActions}
+                     loginActions={this.props.loginActions} auth={this.props.auth}
         />
       </header>
     )
