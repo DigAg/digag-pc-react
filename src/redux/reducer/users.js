@@ -2,20 +2,27 @@
  * Created by Yuicon on 2017/6/27.
  */
 import Immutable from 'immutable';
-import {REGISTER_USER, LOGIN_USER} from '../action/users';
+import {REGISTER_USER, REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE} from '../action/users';
 
 
 const initialState = Immutable.fromJS({
-  user: null,
   newUser: null,
+  error: null,
+  saveSuccess: false,
 });
 
 export const users = (state = initialState, action = {}) => {
   switch (action.type) {
     case REGISTER_USER:
-      return state.set('newUser', action.data);
-    case LOGIN_USER:
-      return state.set('user', action.data);
+      return state.merge({
+        'newUser': action.data,
+        'saveSuccess': false,
+        'error': null,
+      });
+    case REGISTER_USER_SUCCESS:
+      return state.set('saveSuccess', action.data);
+    case REGISTER_USER_FAILURE:
+      return state.set('error', action.data);
     default:
       return state
   }

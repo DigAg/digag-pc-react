@@ -2,7 +2,7 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, {Component} from 'react';
-import {Button, Input, Menu, Notification} from "element-react";
+import {Button, Input, Menu} from "element-react";
 
 import RegisterDialog from "./RegisterDialog";
 import LoginDialog from "./LoginDialog";
@@ -16,27 +16,6 @@ export default class Header extends Component {
       registerDialog: false,
       loginDialog: false,
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
-    if (nextProps.auth.get('token') && this.state.loginDialog) {
-      this.setState({loginDialog: false});
-      Notification.success({
-        title: '成功',
-        message: '登陆成功',
-        duration: 1500
-      });
-    } else if (nextProps.auth.get('error') && this.state.loginDialog) {
-      Notification.error({
-        title: '错误',
-        message: nextProps.auth.get('error'),
-        type: 'success',
-        duration: 1500
-      });
-    }
-
-
   }
 
   handleSelect = (index) => {
@@ -94,10 +73,10 @@ export default class Header extends Component {
           </div>
         </div>
         <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}
-                        registerActions={this.props.registerActions}
+                        registerActions={this.props.registerActions} users={this.props.users}
         />
         <LoginDialog visible={this.state.loginDialog} onClose={this.handleLoginDialogClose()}
-                     loginActions={this.props.loginActions}
+                     loginActions={this.props.loginActions} auth={this.props.auth}
         />
       </header>
     )
