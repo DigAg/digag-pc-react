@@ -3,10 +3,6 @@
  */
 import React, {Component} from 'react';
 import {Button, Input, Menu} from "element-react";
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 import RegisterDialog from "./RegisterDialog";
 import LoginDialog from "./LoginDialog";
 

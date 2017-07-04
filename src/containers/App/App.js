@@ -14,12 +14,8 @@ class App extends Component {
     return(
       <div className="App">
         <div className="App-header">
-<<<<<<< HEAD
-          <Header registerActions={this.props.registerActions} loginActions={this.props.loginActions}/>
-=======
           <Header registerActions={this.props.registerActions} loginActions={this.props.loginActions}
                   auth={this.props.auth} users={this.props.users}/>
->>>>>>> dev
         </div>
         <div className="App-body">
           <div className="welcome-view">

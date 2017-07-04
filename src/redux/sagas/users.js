@@ -1,15 +1,10 @@
 /**
  * Created by Yuicon on 2017/6/30.
  */
-<<<<<<< HEAD
-import {select} from 'redux-saga/effects';
-import {getUsers} from './selectors';
-=======
 import {select, put, call} from 'redux-saga/effects';
 import {getAuth, getUsers} from './selectors';
 import {loginSuccessAction, loginFailureAction, registerSuccessAction, registerFailureAction} from '../action/users';
 import {login, register} from './api';
->>>>>>> dev
 import 'whatwg-fetch';
 
 
@@ -32,21 +27,6 @@ export function* loginUserAsync() {
   const auth = yield select(getAuth);
   const user = auth.get('user');
 
-<<<<<<< HEAD
-  fetch(getURL("auth/login"), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  }).then(response => response.json())
-    .then(json => {
-      console.log('parsed json', json);
-      localStorage.setItem('token', json.token);
-    })
-    .catch(ex => console.log('parsing failed', ex));
-}
-=======
   const json = yield call(login.bind(this, user), 'login');
   if (json.success) {
     yield put(loginSuccessAction(json.data));
@@ -55,5 +35,3 @@ export function* loginUserAsync() {
   }
 }
 
-
->>>>>>> dev
