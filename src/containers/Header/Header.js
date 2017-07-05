@@ -3,10 +3,22 @@
  */
 import React, {Component} from 'react';
 import {Button, Input, Menu} from "element-react";
+import RegisterDialog from '../../components/Header/RegisterDialog';
+import LoginDialog from '../../components/Header/LoginDialog';
+import {connect} from "react-redux";
+import {registerAction, loginAction} from '../../redux/action/users';
+import './Header.css';
 
-import RegisterDialog from "./RegisterDialog";
-import LoginDialog from "./LoginDialog";
-
+@connect(
+  (state) => {
+    console.log(state);
+    return ({
+      users: state.users,
+      auth: state.auth,
+    });
+  },
+  {registerActions: registerAction, loginActions: loginAction}
+)
 export default class Header extends Component {
 
   constructor(props) {
@@ -40,6 +52,7 @@ export default class Header extends Component {
 
   render() {
     return (
+    <div className="App-header">
       <header className="main-header visible">
         <div className="container">
           <a href="/" className="logo">
@@ -62,7 +75,10 @@ export default class Header extends Component {
                 />
               </Menu.Item>
               <Menu.Item index="7">
-                <Button type="text" icon="edit" className="contribute">投稿</Button>
+                <Button type="text" icon="edit" className="contribute"
+                        onClick={() => this.setState({loginDialog: true})}>
+                  投稿
+                </Button>
               </Menu.Item>
               <Menu.Item index="8">
                 <Button type="text" className="login-btn"
@@ -79,6 +95,7 @@ export default class Header extends Component {
                      loginActions={this.props.loginActions} auth={this.props.auth}
         />
       </header>
+    </div>
     )
   }
 }
