@@ -8,6 +8,7 @@ import LoginDialog from '../../components/Header/LoginDialog';
 import {connect} from "react-redux";
 import {registerAction, loginAction} from '../../redux/action/users';
 import './Header.css';
+import portrait from '../../assets/images/portrait.jpg';
 
 @connect(
   (state) => {
@@ -50,6 +51,40 @@ export default class Header extends Component {
     }
   };
 
+  renderMenu () {
+    if (localStorage.getItem('token')) {
+      return (
+        <div style={{ display: 'flex' }}>
+          <Menu.Item index="7">
+            <i className="el-icon-plus"/>
+          </Menu.Item>
+          <Menu.Item index="8">
+            <i className="el-icon-message"/>
+          </Menu.Item>
+          <Menu.Item index="9">
+            <img src={portrait} alt="头像" className="portrait"/>
+          </Menu.Item>
+        </div>
+      )
+    } else {
+      return (
+        <div style={{ display: 'flex' }}>
+          <Menu.Item index="7">
+            <Button type="text" icon="edit" className="contribute"
+                    onClick={() => this.setState({loginDialog: true})}>
+              投稿
+            </Button>
+          </Menu.Item>
+          <Menu.Item index="8">
+            <Button type="text" className="login-btn"
+                    onClick={ () => this.setState({loginDialog: true}) }>登录</Button>
+            <Button type="text" onClick={ () => this.setState({registerDialog: true}) }>注册</Button>
+          </Menu.Item>
+        </div>
+      )
+    }
+  };
+
   render() {
     return (
     <div className="App-header">
@@ -74,17 +109,7 @@ export default class Header extends Component {
                   onChange={(value) => this.setState({searchInput: value})}
                 />
               </Menu.Item>
-              <Menu.Item index="7">
-                <Button type="text" icon="edit" className="contribute"
-                        onClick={() => this.setState({loginDialog: true})}>
-                  投稿
-                </Button>
-              </Menu.Item>
-              <Menu.Item index="8">
-                <Button type="text" className="login-btn"
-                        onClick={ () => this.setState({loginDialog: true}) }>登录</Button>
-                <Button type="text" onClick={ () => this.setState({registerDialog: true}) }>注册</Button>
-              </Menu.Item>
+              {this.renderMenu()}
             </Menu>
           </div>
         </div>

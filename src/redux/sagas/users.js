@@ -29,6 +29,7 @@ export function* loginUserAsync() {
 
   const json = yield call(login.bind(this, user), 'login');
   if (json.success) {
+    localStorage.setItem('token', json.data);
     yield put(loginSuccessAction(json.data));
   } else {
     yield put(loginFailureAction(json.error));

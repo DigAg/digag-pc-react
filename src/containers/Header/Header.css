@@ -72,3 +72,13 @@
   left: 100%;
   color: hsla(0,0%,59%,.4);
 }
+
+.portrait {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  background-position: 50%;
+  background-size: cover;
+  margin-top: 1.4rem;
+}
