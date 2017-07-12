@@ -56,10 +56,17 @@ export default class LoginDialog extends Component {
     });
   };
 
+  handleResetPassWord = () => {
+
+  };
+
+  handleRegister = () => {
+    this.props.onRedirect();
+  };
+
   render() {
     return (
       <Dialog
-        size="tiny"
         title="登录"
         top="30%"
         customClass="login-dialog"
@@ -82,8 +89,16 @@ export default class LoginDialog extends Component {
                      onChange={this.handleChange.bind(this, 'password')}/>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
+              <Button style={{width: '100%'}} type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
                 登录
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button style={{float: 'left'}} type="text" onClick={this.handleRegister}>
+                没有帐号？注册
+              </Button>
+              <Button style={{float: 'right'}} type="text" onClick={this.handleResetPassWord}>
+                忘记密码
               </Button>
             </Form.Item>
           </Form>

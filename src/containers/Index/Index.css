@@ -12,8 +12,23 @@
 }
 
 .register-dialog {
-  padding: 2rem;
-  width: 26.5rem !important;
+  padding: 0;
+  width: 23rem !important;
+  max-width: 100%;
+  font-size: 1.167rem;
+  box-sizing: border-box;
+}
+
+.el-dialog__title span {
+  float: left;
+  margin-bottom: 3rem;
+  font-size: 20px;
+}
+
+.login-dialog {
+  padding: 0;
+  margin: 0;
+  width: 23rem !important;
   max-width: 100%;
   font-size: 1.167rem;
   box-sizing: border-box;
@@ -24,7 +39,6 @@
   margin: 0 auto;
   width: 100%;
   max-width: 960px;
-  height: 100vh;
 }
 
 .welcome-view {

@@ -57,10 +57,13 @@ export default class RegisterDialog extends Component {
     });
   };
 
+  handleLogin = () => {
+    this.props.onRedirect();
+  };
+
   render() {
     return (
       <Dialog
-        size="tiny"
         title="注册"
         top="30%"
         customClass="register-dialog"
@@ -68,7 +71,7 @@ export default class RegisterDialog extends Component {
         visible={ this.props.visible }
         onCancel={ this.props.onClose }
       >
-        <Dialog.Body>
+        <Dialog.Body style={{ paddingBottom: '0px' }}>
           <Form ref="user" model={this.state.user} className="demo-form-inline">
             <Form.Item required={true} prop="username"
                        rules={{required: true, message: '用户名不能为空', trigger: 'blur'}}
@@ -88,9 +91,14 @@ export default class RegisterDialog extends Component {
               <Input type="password" value={this.state.user.password} placeholder="请输入密码"
                      onChange={this.handleChange.bind(this, 'password')}/>
             </Form.Item>
-            <Form.Item>
-              <Button type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
+            <Form.Item style={{ marginBottom: '10px' }}>
+              <Button style={{width: '100%'}} type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
                 注册
+              </Button>
+            </Form.Item>
+            <Form.Item style={{ marginBottom: '10px' }}>
+              <Button type="text" onClick={this.handleLogin}>
+                已有帐号?登陆
               </Button>
             </Form.Item>
           </Form>

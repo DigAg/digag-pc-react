@@ -51,10 +51,18 @@ export default class Header extends Component {
     }
   };
 
-  renderMenu () {
+  handleRedirect = () => {
+    console.log('handleRedirect');
+    this.setState((state) => ({
+      registerDialog: !state.registerDialog,
+      loginDialog: !state.loginDialog
+    }));
+  };
+
+  renderMenu() {
     if (localStorage.getItem('token')) {
       return (
-        <div style={{ display: 'flex' }}>
+        <div style={{display: 'flex'}}>
           <Menu.Item index="7">
             <i className="el-icon-plus"/>
           </Menu.Item>
@@ -68,7 +76,7 @@ export default class Header extends Component {
       )
     } else {
       return (
-        <div style={{ display: 'flex' }}>
+        <div style={{display: 'flex'}}>
           <Menu.Item index="7">
             <Button type="text" icon="edit" className="contribute"
                     onClick={() => this.setState({loginDialog: true})}>
@@ -87,40 +95,42 @@ export default class Header extends Component {
 
   render() {
     return (
-    <div className="App-header">
-      <header className="main-header visible">
-        <div className="container">
-          <a href="/" className="logo">
-            <img src="//gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="掘金" className="logo-img"/>
-          </a>
-          <div className="nav-menu">
-            <Menu defaultActive="1" mode="horizontal" onSelect={this.handleSelect}>
-              <Menu.Item index="1">首页</Menu.Item>
-              <Menu.Item index="2">专栏</Menu.Item>
-              <Menu.Item index="3">收藏集</Menu.Item>
-              <Menu.Item index="4">发现</Menu.Item>
-              <Menu.Item index="5">标签</Menu.Item>
-              <Menu.Item index="6">
-                <Input
-                  size="small"
-                  icon="search"
-                  placeholder="搜索掘金"
-                  onIconClick={this.handleIconClick}
-                  onChange={(value) => this.setState({searchInput: value})}
-                />
-              </Menu.Item>
-              {this.renderMenu()}
-            </Menu>
+      <div className="App-header">
+        <header className="main-header visible">
+          <div className="container">
+            <a href="/" className="logo">
+              <img src="//gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="掘金" className="logo-img"/>
+            </a>
+            <div className="nav-menu">
+              <Menu defaultActive="1" mode="horizontal" onSelect={this.handleSelect}>
+                <Menu.Item index="1">首页</Menu.Item>
+                <Menu.Item index="2">专栏</Menu.Item>
+                <Menu.Item index="3">收藏集</Menu.Item>
+                <Menu.Item index="4">发现</Menu.Item>
+                <Menu.Item index="5">标签</Menu.Item>
+                <Menu.Item index="6">
+                  <Input
+                    size="small"
+                    icon="search"
+                    placeholder="搜索掘金"
+                    onIconClick={this.handleIconClick}
+                    onChange={(value) => this.setState({searchInput: value})}
+                  />
+                </Menu.Item>
+                {this.renderMenu()}
+              </Menu>
+            </div>
           </div>
-        </div>
-        <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}
-                        registerActions={this.props.registerActions} users={this.props.users}
-        />
-        <LoginDialog visible={this.state.loginDialog} onClose={this.handleLoginDialogClose()}
-                     loginActions={this.props.loginActions} auth={this.props.auth}
-        />
-      </header>
-    </div>
+          <RegisterDialog visible={this.state.registerDialog} onClose={this.handleRegisterDialogClose()}
+                          registerActions={this.props.registerActions} users={this.props.users}
+                          onRedirect={this.handleRedirect}
+          />
+          <LoginDialog visible={this.state.loginDialog} onClose={this.handleLoginDialogClose()}
+                       loginActions={this.props.loginActions} auth={this.props.auth}
+                       onRedirect={this.handleRedirect}
+          />
+        </header>
+      </div>
     )
   }
 }
