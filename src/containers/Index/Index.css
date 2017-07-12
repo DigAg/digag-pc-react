@@ -1,14 +1,5 @@
 .App {
-  text-align: center;
-}
 
-.login-btn {
-
-}
-
-.login-btn:after {
-  content: "\B7";
-  margin: 0 .4rem;
 }
 
 .register-dialog {
@@ -56,9 +47,8 @@
 }
 
 .main {
-  background-color: #08c6a7;
-  width: 560px;
-  margin-left: 13rem;
+  width: 100%;
+  /*margin-left: 13rem;*/
 }
 
 .sidebar {

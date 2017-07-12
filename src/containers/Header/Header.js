@@ -77,8 +77,9 @@ export default class Header extends Component {
     } else {
       return (
         <div style={{display: 'flex'}}>
-          <Menu.Item index="7">
-            <Button type="text" icon="edit" className="contribute"
+          <Menu.Item index="7" >
+            <Button type="text" icon="edit"
+                    className="contribute"
                     onClick={() => this.setState({loginDialog: true})}>
               投稿
             </Button>

@@ -1,0 +1,28 @@
+.entry {
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgba(178,186,194,.15);
+  height: 8.5rem;
+}
+
+.entry .content-box {
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.content-box .thumb {
+  flex: 0 0 auto;
+  width: 5rem;
+  height: 5rem;
+  margin-right: 2rem;
+  border-radius: 2px;
+  background-repeat: no-repeat;
+}
+
+.content-box .info-box {
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}

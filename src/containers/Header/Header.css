@@ -68,9 +68,19 @@
 .contribute:after{
   content: "|";
   position: absolute;
+  color: hsla(0,0%,59%,.4);
   top: 24px;
   left: 100%;
-  color: hsla(0,0%,59%,.4);
+  z-index: 1;
+}
+
+.login-btn {
+
+}
+
+.login-btn:after {
+  content: "\B7";
+  margin: 0 .4rem;
 }
 
 .portrait {

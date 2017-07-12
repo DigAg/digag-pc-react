@@ -96,7 +96,7 @@ export default class RegisterDialog extends Component {
                 注册
               </Button>
             </Form.Item>
-            <Form.Item style={{ marginBottom: '10px' }}>
+            <Form.Item style={{ marginBottom: '10px', textAlign: 'center' }}>
               <Button type="text" onClick={this.handleLogin}>
                 已有帐号?登陆
               </Button>
