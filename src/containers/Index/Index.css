@@ -10,12 +10,6 @@
   box-sizing: border-box;
 }
 
-.el-dialog__title span {
-  float: left;
-  margin-bottom: 3rem;
-  font-size: 20px;
-}
-
 .login-dialog {
   padding: 0;
   margin: 0;

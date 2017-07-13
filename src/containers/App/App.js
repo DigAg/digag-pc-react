@@ -6,8 +6,7 @@ import {BrowserRouter as Router,Route} from 'react-router-dom'
 import './App.css';
 import Index from "../Index/Index";
 import Header from "../Header/Header";
-
-const s = () => <div>sadasd</div>;
+import SubmitEntry from "../SubmitEntry/SubmitEntry";
 
 export default class App extends Component {
 
@@ -17,8 +16,7 @@ export default class App extends Component {
       <div className="App">
         <Route component={Header}/>
         <Route exact path="/" component={Index}/>
-        <Route path="/s" component={s}/>
-        {/*<Route path="/page2" component={Page2}/>*/}
+        <Route exact path="/submit-entry" component={SubmitEntry}/>
       </div>
     </Router>
     )

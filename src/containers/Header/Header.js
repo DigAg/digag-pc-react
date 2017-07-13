@@ -12,7 +12,6 @@ import portrait from '../../assets/images/portrait.jpg';
 
 @connect(
   (state) => {
-    console.log(state);
     return ({
       users: state.users,
       auth: state.auth,
@@ -32,7 +31,13 @@ export default class Header extends Component {
   }
 
   handleSelect = (index) => {
-    console.log(index);
+    switch (index) {
+      case 'edit':
+        this.props.history.push('/submit-entry');
+        break;
+      default:
+        console.log(index);
+    }
   };
 
   handleIconClick = () => {
@@ -59,11 +64,19 @@ export default class Header extends Component {
     }));
   };
 
+  handleLogin = () => {
+    this.setState({loginDialog: true})
+  };
+
+  handleRegister = () => {
+    this.setState({registerDialog: true})
+  };
+
   renderMenu() {
     if (localStorage.getItem('token')) {
       return (
         <div style={{display: 'flex'}}>
-          <Menu.Item index="7">
+          <Menu.Item index="edit">
             <i className="el-icon-plus"/>
           </Menu.Item>
           <Menu.Item index="8">
@@ -77,17 +90,17 @@ export default class Header extends Component {
     } else {
       return (
         <div style={{display: 'flex'}}>
-          <Menu.Item index="7" >
+          <Menu.Item index="7">
             <Button type="text" icon="edit"
                     className="contribute"
-                    onClick={() => this.setState({loginDialog: true})}>
+                    onClick={this.handleLogin}>
               投稿
             </Button>
           </Menu.Item>
           <Menu.Item index="8">
             <Button type="text" className="login-btn"
-                    onClick={ () => this.setState({loginDialog: true}) }>登录</Button>
-            <Button type="text" onClick={ () => this.setState({registerDialog: true}) }>注册</Button>
+                    onClick={ this.handleLogin }>登录</Button>
+            <Button type="text" onClick={ this.handleRegister }>注册</Button>
           </Menu.Item>
         </div>
       )

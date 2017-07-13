@@ -11,7 +11,6 @@ import Entry from "../../components/Index/Entry";
 
 @connect(
   (state) => {
-    console.log(state);
     return ({
       users: state.users,
       auth: state.auth,

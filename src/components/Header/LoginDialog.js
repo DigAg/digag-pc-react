@@ -18,7 +18,6 @@ export default class LoginDialog extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
     if (nextProps.auth.get('token') && this.props.visible) {
       this.props.onClose();
       Notification.success({

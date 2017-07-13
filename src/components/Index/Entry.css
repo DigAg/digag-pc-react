@@ -5,6 +5,10 @@
   height: 8.5rem;
 }
 
+.entry a {
+  text-decoration:none
+}
+
 .entry .content-box {
   padding: 1.5rem 2rem;
   display: flex;
@@ -20,9 +24,29 @@
   background-repeat: no-repeat;
 }
 
-.content-box .info-box {
+.info-box {
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
   min-width: 0;
+}
+
+.meta-row {
+  font-size: 1rem;
+  color: #b2bac2;
+}
+
+.title-row {
+  margin: .5rem 0 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #2e3135;
+}
+
+.action-row {
+  color: #b2bac2;
 }

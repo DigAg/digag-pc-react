@@ -19,7 +19,6 @@ export default class RegisterDialog extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
     if (nextProps.users.get('saveSuccess') && this.props.visible) {
       Notification.success({
         title: '成功',
