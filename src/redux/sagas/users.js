@@ -7,8 +7,6 @@ import {loginSuccessAction, loginFailureAction, registerSuccessAction, registerF
 import {login, register} from './api';
 import 'whatwg-fetch';
 
-
-
 export function* registerUserAsync() {
   const users = yield select(getUsers);
   const newUser = users.get('newUser');

@@ -3,20 +3,19 @@
  * https://github.com/Yuicon
  */
 import React, {Component} from 'react';
-import {Button, Form, Input} from "element-react";
+import {Button, Form, Input, Switch} from "element-react";
 import {connect} from "react-redux";
-import {registerAction, loginAction} from '../../redux/action/users';
+import {createEntryAction} from '../../redux/action/entries';
 import './SubmitEntry.css';
 
 @connect(
   (state) => {
     console.log(state);
     return ({
-      users: state.users,
-      auth: state.auth,
+      entries: state.entries,
     });
   },
-  {registerActions: registerAction, loginActions: loginAction}
+  {createEntryAction: createEntryAction}
 )
 export default class SubmitEntry extends Component {
 
@@ -27,7 +26,7 @@ export default class SubmitEntry extends Component {
       form: {
         title: '',
         content: '',
-        original: null,
+        original: true,
         originalUrl: null,
         english: false,
         type: 'article',
@@ -37,6 +36,8 @@ export default class SubmitEntry extends Component {
 
   handleSubmit = () => {
     console.log(this.state.form);
+    this.props.createEntryAction(this.state.form);
+    console.log(this.props.entries);
   };
 
   handleChange = (key, value) => {
@@ -62,6 +63,22 @@ export default class SubmitEntry extends Component {
             </Form.Item>
             <Form.Item label="描述">
               <Input value={this.state.form.content} onChange={this.handleChange.bind(this, 'content')}/>
+            </Form.Item>
+            <Form.Item >
+              <Switch
+                value={this.state.form.original}
+                onChange={this.handleChange.bind(this, 'original')}
+                onText="原创"
+                offText="转载">
+              </Switch>
+            </Form.Item>
+            <Form.Item >
+              <Switch
+                value={this.state.form.english}
+                onChange={this.handleChange.bind(this, 'english')}
+                onText="英文"
+                offText="中文">
+              </Switch>
             </Form.Item>
             <Form.Item >
               <Button type="primary" onClick={this.handleSubmit}>

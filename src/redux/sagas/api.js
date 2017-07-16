@@ -32,3 +32,18 @@ export const login = (user) => {
     })
     .catch(ex => console.log('parsing failed', ex));
 };
+
+export const entryCreate = (entry, token) => {
+  return fetch(getURL("entries"), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(entry)
+  }).then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(ex => console.log('parsing failed', ex));
+};

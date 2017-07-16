@@ -10,15 +10,15 @@ export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
 export const registerAction = (newUser) => {
-  return{
-    type:REGISTER_USER,
+  return {
+    type: REGISTER_USER,
     data: newUser,
   }
 };
 
 export const loginAction = (user) => {
-  return{
-    type:LOGIN_USER,
+  return {
+    type: LOGIN_USER,
     data: user,
   }
 };
