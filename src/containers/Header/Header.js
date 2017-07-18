@@ -35,6 +35,9 @@ export default class Header extends Component {
       case 'edit':
         this.props.history.push('/submit-entry');
         break;
+      case 'index':
+        this.props.history.push('/');
+        break;
       default:
         console.log(index);
     }
@@ -117,7 +120,7 @@ export default class Header extends Component {
             </a>
             <div className="nav-menu">
               <Menu defaultActive="1" mode="horizontal" onSelect={this.handleSelect}>
-                <Menu.Item index="1">首页</Menu.Item>
+                <Menu.Item index="index">首页</Menu.Item>
                 <Menu.Item index="2">专栏</Menu.Item>
                 <Menu.Item index="3">收藏集</Menu.Item>
                 <Menu.Item index="4">发现</Menu.Item>

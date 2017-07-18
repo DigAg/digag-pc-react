@@ -8,14 +8,17 @@ import './Entry.css';
 export default class Entry extends Component {
 
   render(){
+
+    const entry = this.props.entry;
+
     return(
       <div className="entry">
-        <a href="/">
+        <a href={`${entry.originalUrl}`} target="_blank" rel="noopener noreferrer">
           <div className="content-box">
             <div className="info-box">
-              <div className="meta-row">专栏-adasdasdasd</div>
-              <div className="title-row">标题阿道夫撒旦发射方式对付</div>
-              <div className="action-row">喜欢3247用3952有985723958</div>
+              <div className="meta-row">专栏-test</div>
+              <div className="title-row">{entry.title}</div>
+              <div className="action-row">{entry.content}</div>
             </div>
             <div className="thumb">
               <img className="thumb"

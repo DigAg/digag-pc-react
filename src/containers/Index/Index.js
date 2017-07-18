@@ -4,7 +4,7 @@
  */
 import React, { Component } from 'react';
 import './Index.css';
-import {registerAction, loginAction} from '../../redux/action/users';
+import {findAllEntriesAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
 import {Tabs} from "element-react";
 import Entry from "../../components/Index/Entry";
@@ -12,13 +12,17 @@ import Entry from "../../components/Index/Entry";
 @connect(
   (state) => {
     return ({
-      users: state.users,
-      auth: state.auth,
+      entries: state.entries.get('entries'),
+      error: state.entries.get('error'),
     });
   },
-  {registerActions: registerAction, loginActions: loginAction}
+  {findAllEntriesAction: findAllEntriesAction}
 )
 export default class Index extends Component {
+
+  componentWillMount() {
+    this.props.findAllEntriesAction();
+  }
 
   render(){
     return(
@@ -34,11 +38,12 @@ export default class Index extends Component {
                   ['热门','最新','评论'].map((pane, index) => {
                     return(
                       <Tabs.Pane label={pane} name={index.toString()} key={pane}>
-                        <Entry/>
-                        <Entry/>
-                        <Entry/>
-                        <Entry/>
-                        <Entry/>
+                        {
+                          this.props.entries.map(entry => {
+                            return <Entry key={entry.id} entry={entry}/>
+                          })
+                        }
+
                       </Tabs.Pane>
                     );
                   })

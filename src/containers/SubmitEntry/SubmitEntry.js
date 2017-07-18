@@ -10,7 +10,6 @@ import './SubmitEntry.css';
 
 @connect(
   (state) => {
-    console.log(state);
     return ({
       entries: state.entries,
     });

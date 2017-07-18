@@ -5,7 +5,6 @@ import {select, put, call} from 'redux-saga/effects';
 import {getAuth, getUsers} from './selectors';
 import {loginSuccessAction, loginFailureAction, registerSuccessAction, registerFailureAction} from '../action/users';
 import {login, register} from './api';
-import 'whatwg-fetch';
 
 export function* registerUserAsync() {
   const users = yield select(getUsers);

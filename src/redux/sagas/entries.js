@@ -4,7 +4,12 @@
  */
 import {select, put, call} from 'redux-saga/effects';
 import {getEntries} from './selectors';
-import {createEntryFailureAction, createEntrySuccessAction} from '../action/entries';
+import {
+  createEntryFailureAction,
+  createEntrySuccessAction,
+  findAllEntriesSuccessAction,
+  findAllEntriesFailureAction
+} from '../action/entries';
 import {entryCreate, entries} from './api';
 import 'whatwg-fetch';
 
@@ -24,12 +29,12 @@ export function* createEntryAsync() {
 }
 
 export function* entriesAsync() {
-  const json = yield call(entries(), 'entries');
+  const json = yield call(entries, 'entries');
   if (json.success) {
-    yield put(createEntryFailureAction(true));
+    yield put(findAllEntriesSuccessAction(json.data));
   } else {
-    console.log('registerUserAsync', json.error);
-    yield put(createEntrySuccessAction('创建条目失败'));
+    console.log('entriesAsync', json.error);
+    yield put(findAllEntriesFailureAction('获取条目列表失败'));
   }
 }
 

@@ -2,6 +2,7 @@
  * Created by Yuicon on 2017/7/4.
  * https://github.com/Yuicon
  */
+import 'whatwg-fetch';
 
 const getURL = (url) => `http://139.224.135.86:8080/${url}`;
 
