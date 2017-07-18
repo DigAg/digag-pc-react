@@ -3,7 +3,7 @@
  * https://github.com/Yuicon
  */
 import React, {Component} from 'react';
-import {Button, Form, Input, Switch} from "element-react";
+import {Button, Form, Input, Switch, Notification} from "element-react";
 import {connect} from "react-redux";
 import {createEntryAction} from '../../redux/action/entries';
 import './SubmitEntry.css';
@@ -30,14 +30,40 @@ export default class SubmitEntry extends Component {
         originalUrl: null,
         english: false,
         type: 'article',
-      }
+      },
+    loading: false,
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.entries.get('saveSuccess')) {
+      Notification.success({
+        title: '成功',
+        message: '投稿成功',
+        duration: 1500
+      });
+      this.setState({form: {
+        title: '',
+        content: '',
+        original: true,
+        originalUrl: null,
+        english: false,
+        type: 'article',
+      }});
+    } else if (nextProps.entries.get('error')) {
+      Notification.error({
+        title: '错误',
+        message: nextProps.entries.get('error'),
+        type: 'success',
+        duration: 1500
+      });
+    }
+    this.setState({loading: false});
+  }
+
   handleSubmit = () => {
-    console.log(this.state.form);
     this.props.createEntryAction(this.state.form);
-    console.log(this.props.entries);
+    this.setState({loading: true});
   };
 
   handleChange = (key, value) => {
@@ -81,7 +107,7 @@ export default class SubmitEntry extends Component {
               </Switch>
             </Form.Item>
             <Form.Item >
-              <Button type="primary" onClick={this.handleSubmit}>
+              <Button type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
                 发布
               </Button>
             </Form.Item>

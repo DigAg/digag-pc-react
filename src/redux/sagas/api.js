@@ -47,3 +47,16 @@ export const entryCreate = (entry, token) => {
     })
     .catch(ex => console.log('parsing failed', ex));
 };
+
+export const entries = () => {
+  return fetch(getURL("entries"), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }).then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(ex => console.log('parsing failed', ex));
+};
