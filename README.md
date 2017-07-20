@@ -13,39 +13,57 @@
 ### 组织结构
 ```
 digag
-├── README.md
-├── node_modules
-├── package.json
-├── .editorconfig
-├── .eslintignore
-├── .gitignore
 ├── config
 ├── scripts
 ├── public
-│   └── favicon.ico
-│   └── index.html
-│   └── manifest.json
-└── src
+    └── favicon.ico
+    └── index.html
+    └── manifest.json
+├── src
     └── assets
     └── components
     └── containers
     └── utils
     └── redux
         └── action
-            └── users.js
         └── reducer
-            └── auth.js
-            └── users.js
         └── sagas
-            └── api.js
-            └── sagas.js
-            └── selectors.js.js
-            └── users.js
         └── store
-            └── store.js
     └── App.test.js
     └── index.css
     └── index.js
     └── registerServiceWorker.js
+├── README.md
+├── node_modules
+├── package.json
+├── .editorconfig
+├── .eslintignore
+├── .gitignore
 ```
+
+### 技术选型
+
+#### 前端技术:
+技术 | 名称
+----|------
+React | 前端框架  
+Redux | 状态管理  
+Redux-Sagas | Redux异步操作中间件
+React-Router | 路由
+Immutable | 不可变数据
+Element-React | UI
+
+#### 后端技术:
+技术 | 名称 
+----|------
+Spring Framework | 容器
+SpringBoot | MVC框架
+Spring Security | 安全框架
+Hibernate | ORM框架
+Druid | 数据库连接池
+Redis | 分布式缓存数据库
+Log4J | 日志组件
+Swagger2 | 接口测试框架
+Docker | 应用容器
+Maven | 项目构建管理
 
