@@ -5,7 +5,7 @@
 [![](https://img.shields.io/github/issues/DigAg/digag-pc-react.svg)](https://github.com/DigAg/digag-pc-react/issues)  
 [![](https://img.shields.io/github/forks/DigAg/digag-pc-react.svg)](https://github.com/DigAg/digag-pc-react/network) 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-### online http://139.224.135.86
+## [在线网站](http://139.224.135.86)
 ## 项目介绍
    
    基于React的实践项目  欢迎提建议
@@ -53,7 +53,7 @@ React-Router | 路由
 Immutable | 不可变数据
 Element-React | UI
 
-#### 后端技术:
+#### [后端](https://github.com/DigAg/digag-server)技术:
 技术 | 名称 
 ----|------
 Spring Framework | 容器
