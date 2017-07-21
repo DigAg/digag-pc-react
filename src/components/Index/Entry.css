@@ -50,3 +50,30 @@
 .action-row {
   color: #b2bac2;
 }
+
+.entry-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 .8rem;
+  height: 2rem;
+  width: 2.5rem;
+  font-size: 1.083rem;
+  line-height: 1;
+  color: #b2bac2;
+  border-radius: 1px;
+  border: 1px solid #edeeef;
+}
+
+.entry-title-box {
+  display: flex;
+  align-items: center;
+  padding: 0 .8rem;
+  height: 100%;
+}
+
+.entry-collectionCount {
+  padding-left: 0.5rem;
+  color: #8c939d;
+}

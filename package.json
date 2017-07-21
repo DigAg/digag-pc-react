@@ -13,7 +13,8 @@
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.1",
-    "redux-saga": "^0.15.4"
+    "redux-saga": "^0.15.4",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",

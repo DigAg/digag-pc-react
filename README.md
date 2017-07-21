@@ -52,6 +52,7 @@ Redux-Sagas | Redux异步操作中间件
 React-Router | 路由
 Immutable | 不可变数据
 Element-React | UI
+moment | 日期转化
 
 #### [后端](https://github.com/DigAg/digag-server)技术:
 技术 | 名称 
