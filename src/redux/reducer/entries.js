@@ -53,7 +53,8 @@ export const entries = (state = initialState, action = {}) => {
     case UPDATE_ENTRY_SUCCESS:
       const entries = state.get('entries');
       entries[entries.findIndex(entry => entry.id === action.data.id)] = action.data;
-      return state.set('entries', entries);
+      console.log(entries);
+      return state.set('entries', entries.concat());
     case UPDATE_ENTRY_FAILURE:
       return state.merge({
         'error': action.data,

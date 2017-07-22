@@ -11,16 +11,14 @@ export default class Entry extends Component {
 
   handleClick = () => {
     console.log(this.props.entry.title);
-    const entry =  this.props.entry;
+    const entry =  Object.assign({}, this.props.entry);
     entry.collectionCount = entry.collectionCount + 1;
     this.props.onClick(entry);
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    debugger
-    return nextProps.entry.get('collectionCount') !== this.props.entry.get('collectionCount');
+    return nextProps.entry.collectionCount !== this.props.entry.collectionCount;
   }
-
 
   render(){
 
