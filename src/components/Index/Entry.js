@@ -11,7 +11,16 @@ export default class Entry extends Component {
 
   handleClick = () => {
     console.log(this.props.entry.title);
+    const entry =  this.props.entry;
+    entry.collectionCount = entry.collectionCount + 1;
+    this.props.onClick(entry);
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    debugger
+    return nextProps.entry.get('collectionCount') !== this.props.entry.get('collectionCount');
+  }
+
 
   render(){
 
@@ -28,7 +37,7 @@ export default class Entry extends Component {
                 <div className="entry-item">
                   <a href="javascript:void(0)">
                     <div className="entry-title-box" onClick={this.handleClick}>
-                      <img data-v-34a213f3="" src="//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg" alt="喜欢"/>
+                      <img src="//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg" alt="喜欢"/>
                       <span className="entry-collectionCount">{entry.collectionCount}</span>
                     </div>
                   </a>

@@ -46,8 +46,10 @@
 }
 
 .sidebar {
-  background-color: #e3e001;
+  background-color: #a8b9e3;
   width: 19.2rem;
   box-sizing: border-box;
+  margin-top: 4rem;
+  margin-left: 1rem;
 }
 

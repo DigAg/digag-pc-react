@@ -52,18 +52,20 @@
 }
 
 .entry-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0 .8rem;
   height: 2rem;
-  width: 2.5rem;
   font-size: 1.083rem;
   line-height: 1;
   color: #b2bac2;
   border-radius: 1px;
   border: 1px solid #edeeef;
+}
+
+.entry-item a {
+  width: 100%;
 }
 
 .entry-title-box {

@@ -6,7 +6,13 @@ import Immutable from 'immutable';
 import {
   CREATE_ENTRY,
   CREATE_ENTRY_FAILURE,
-  CREATE_ENTRY_SUCCESS, FIND_ALL_ENTRIES, FIND_ALL_ENTRIES_FAILURE, FIND_ALL_ENTRIES_SUCCESS
+  CREATE_ENTRY_SUCCESS,
+  FIND_ALL_ENTRIES,
+  FIND_ALL_ENTRIES_FAILURE,
+  FIND_ALL_ENTRIES_SUCCESS,
+  UPDATE_ENTRY,
+  UPDATE_ENTRY_SUCCESS,
+  UPDATE_ENTRY_FAILURE
 } from '../action/entries';
 
 
@@ -14,7 +20,8 @@ const initialState = Immutable.fromJS({
   newEntry: null,
   error: null,
   saveSuccess: false,
-  entries: []
+  entries: [],
+  oldEntry: null
 });
 
 export const entries = (state = initialState, action = {}) => {
@@ -38,6 +45,20 @@ export const entries = (state = initialState, action = {}) => {
       return state.set('entries', action.data);
     case FIND_ALL_ENTRIES_FAILURE:
       return state.set('error', action.data);
+    case UPDATE_ENTRY:
+      return state.merge({
+        'error': null,
+        'oldEntry': action.data
+      });
+    case UPDATE_ENTRY_SUCCESS:
+      const entries = state.get('entries');
+      entries[entries.findIndex(entry => entry.id === action.data.id)] = action.data;
+      return state.set('entries', entries);
+    case UPDATE_ENTRY_FAILURE:
+      return state.merge({
+        'error': action.data,
+        'oldEntry': null
+      });
     default:
       return state
   }

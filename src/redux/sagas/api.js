@@ -61,3 +61,18 @@ export const entries = () => {
     })
     .catch(ex => console.log('parsing failed', ex));
 };
+
+export const updateEntry = (entry, token) => {
+  return fetch(getURL(`entries/${entry.get('id')}`), {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(entry)
+  }).then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(ex => console.log('parsing failed', ex));
+};
