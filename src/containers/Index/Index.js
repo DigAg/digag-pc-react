@@ -4,7 +4,7 @@
  */
 import React, { Component } from 'react';
 import './Index.css';
-import {findAllEntriesAction, updateEntryAction} from '../../redux/action/entries';
+import {findAllEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
 import {Tabs} from "element-react";
 import Entry from "../../components/Index/Entry";
@@ -16,7 +16,7 @@ import Entry from "../../components/Index/Entry";
       error: state.entries.get('error'),
     });
   },
-  {findAllEntriesAction, updateEntryAction}
+  {findAllEntriesAction, likeEntryAction}
 )
 export default class Index extends Component {
 
@@ -40,7 +40,7 @@ export default class Index extends Component {
                       <Tabs.Pane label={pane} name={index.toString()} key={pane}>
                         {
                           this.props.entries.map(entry => {
-                            return <Entry key={entry.id} entry={entry} onClick={this.props.updateEntryAction}/>
+                            return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>
                           })
                         }
 

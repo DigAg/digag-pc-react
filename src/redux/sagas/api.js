@@ -76,3 +76,17 @@ export const updateEntry = (entry, token) => {
     })
     .catch(ex => console.log('parsing failed', ex));
 };
+
+export const likeEntry = (eid, token) => {
+  return fetch(getURL(`entries/like/${eid}`), {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  }).then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(ex => console.log('parsing failed', ex));
+};

@@ -10,9 +10,9 @@ import {
   findAllEntriesSuccessAction,
   findAllEntriesFailureAction,
   updateEntrySuccessAction,
-  updateEntryFailureAction
+  updateEntryFailureAction, likeEntryResultAction
 } from '../action/entries';
-import {entryCreate, entries, updateEntry} from './api';
+import {entryCreate, entries, updateEntry, likeEntry} from './api';
 import 'whatwg-fetch';
 
 export function* createEntryAsync() {
@@ -40,6 +40,20 @@ export function* updateEntryAsync() {
   } else {
     console.log('createEntryAsync', json.error);
     yield put(updateEntryFailureAction('更新条目失败'));
+  }
+}
+
+export function* likeEntryAsync() {
+  const entries = yield select(getEntries);
+  const eid = entries.get('eid');
+  const token = localStorage.getItem('token');
+  const json = yield call(likeEntry.bind(this, eid, token), 'updateEntry');
+  if (json.success) {
+    console.log('likeEntryAsyncSuccess', json.data);
+    const count = json.data === 1 ? 1 : -1;
+    yield put(likeEntryResultAction(eid, count));
+  } else {
+    console.log('likeEntryAsyncError', json.error);
   }
 }
 

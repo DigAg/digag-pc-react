@@ -12,7 +12,7 @@ import {
   FIND_ALL_ENTRIES_SUCCESS,
   UPDATE_ENTRY,
   UPDATE_ENTRY_SUCCESS,
-  UPDATE_ENTRY_FAILURE
+  UPDATE_ENTRY_FAILURE, LIKE_ENTRY, LIKE_RESULT_ENTRY
 } from '../action/entries';
 
 
@@ -21,10 +21,12 @@ const initialState = Immutable.fromJS({
   error: null,
   saveSuccess: false,
   entries: [],
-  oldEntry: null
+  oldEntry: null,
+  eid: null,
 });
 
 export const entries = (state = initialState, action = {}) => {
+  let entries;
   switch (action.type) {
     case CREATE_ENTRY:
       return state.merge({
@@ -42,7 +44,7 @@ export const entries = (state = initialState, action = {}) => {
         'error': null,
       });
     case FIND_ALL_ENTRIES_SUCCESS:
-      return state.set('entries', action.data);
+      return state.set('entries', action.data.content);
     case FIND_ALL_ENTRIES_FAILURE:
       return state.set('error', action.data);
     case UPDATE_ENTRY:
@@ -51,14 +53,26 @@ export const entries = (state = initialState, action = {}) => {
         'oldEntry': action.data
       });
     case UPDATE_ENTRY_SUCCESS:
-      const entries = state.get('entries');
+      entries = state.get('entries');
       entries[entries.findIndex(entry => entry.id === action.data.id)] = action.data;
-      console.log(entries);
       return state.set('entries', entries.concat());
     case UPDATE_ENTRY_FAILURE:
       return state.merge({
         'error': action.data,
         'oldEntry': null
+      });
+    case LIKE_ENTRY:
+      return state.merge({
+        'eid': action.data
+      });
+    case LIKE_RESULT_ENTRY:
+      debugger
+      entries = state.get('entries');
+      let likeEntry = entries[entries.findIndex(entry => entry.id === action.data.eid)];
+      likeEntry.collectionCount = Number(action.data.count) + Number(likeEntry.collectionCount);
+      return state.merge({
+        'entries': entries.concat(),
+         'eid': null
       });
     default:
       return state

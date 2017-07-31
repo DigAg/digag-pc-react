@@ -9,11 +9,15 @@ import './Entry.css';
 
 export default class Entry extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLike: false
+    };
+  }
+
   handleClick = () => {
-    console.log(this.props.entry.title);
-    const entry =  Object.assign({}, this.props.entry);
-    entry.collectionCount = entry.collectionCount + 1;
-    this.props.onClick(entry);
+    this.props.onClick(this.props.entry.id);
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,8 +39,11 @@ export default class Entry extends Component {
                 <div className="entry-item">
                   <a href="javascript:void(0)">
                     <div className="entry-title-box" onClick={this.handleClick}>
-                      <img src="//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg" alt="喜欢"/>
-                      <span className="entry-collectionCount">{entry.collectionCount}</span>
+                      <img src={this.state.isLike
+                        ? "//gold-cdn.xitu.io/v3/static/img/liked.6137140.svg"
+                        :
+                        "//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg"}  alt="喜欢"/>
+                      <span className={`entry-collectionCount ${this.state.isLike ? 'like' : ''}`}>{entry.collectionCount}</span>
                     </div>
                   </a>
                 </div>

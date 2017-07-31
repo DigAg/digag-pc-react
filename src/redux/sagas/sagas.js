@@ -4,8 +4,8 @@
 import { takeLatest, takeEvery } from 'redux-saga/effects';
 import {registerUserAsync, loginUserAsync} from './users';
 import {REGISTER_USER, LOGIN_USER} from '../action/users';
-import {createEntryAsync, entriesAsync, updateEntryAsync} from './entries';
-import {CREATE_ENTRY, FIND_ALL_ENTRIES, UPDATE_ENTRY} from '../action/entries';
+import {createEntryAsync, entriesAsync, likeEntryAsync, updateEntryAsync} from './entries';
+import {CREATE_ENTRY, FIND_ALL_ENTRIES, LIKE_ENTRY, UPDATE_ENTRY} from '../action/entries';
 
 export default function* rootSaga() {
   yield [
@@ -14,5 +14,6 @@ export default function* rootSaga() {
     takeEvery(CREATE_ENTRY, createEntryAsync),
     takeLatest(FIND_ALL_ENTRIES, entriesAsync),
     takeEvery(UPDATE_ENTRY, updateEntryAsync),
+    takeEvery(LIKE_ENTRY, likeEntryAsync),
   ];
 }
