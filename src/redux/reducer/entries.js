@@ -66,14 +66,10 @@ export const entries = (state = initialState, action = {}) => {
         'eid': action.data
       });
     case LIKE_RESULT_ENTRY:
-      debugger
       entries = state.get('entries');
       let likeEntry = entries[entries.findIndex(entry => entry.id === action.data.eid)];
       likeEntry.collectionCount = Number(action.data.count) + Number(likeEntry.collectionCount);
-      return state.merge({
-        'entries': entries.concat(),
-         'eid': null
-      });
+      return state.set('entries', entries.concat());
     default:
       return state
   }

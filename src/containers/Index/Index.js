@@ -24,6 +24,10 @@ export default class Index extends Component {
     this.props.findAllEntriesAction();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.entries !== this.props.entries;
+  }
+
   render(){
     return(
       <div className="App">
@@ -43,7 +47,6 @@ export default class Index extends Component {
                             return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>
                           })
                         }
-
                       </Tabs.Pane>
                     );
                   })

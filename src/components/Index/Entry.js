@@ -12,7 +12,8 @@ export default class Entry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLike: false
+      isLike: false,
+      collectionCount: this.props.entry.collectionCount
     };
   }
 
@@ -20,8 +21,21 @@ export default class Entry extends Component {
     this.props.onClick(this.props.entry.id);
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.entry.collectionCount !== this.props.entry.collectionCount;
+  componentDidMount() {
+    console.log('entries', this.props.entry.id);
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps.entry.collectionCount !== this.props.entry.collectionCount
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.entry.collectionCount > this.state.collectionCount) {
+      this.setState({isLike: true});
+    }
+    if (nextProps.entry.collectionCount < this.state.collectionCount) {
+      this.setState({isLike: false});
+    }
   }
 
   render(){
@@ -39,10 +53,10 @@ export default class Entry extends Component {
                 <div className="entry-item">
                   <a href="javascript:void(0)">
                     <div className="entry-title-box" onClick={this.handleClick}>
-                      <img src={this.state.isLike
+                      <img src={`${this.state.isLike
                         ? "//gold-cdn.xitu.io/v3/static/img/liked.6137140.svg"
                         :
-                        "//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg"}  alt="喜欢"/>
+                        "//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg"}`}  alt="喜欢"/>
                       <span className={`entry-collectionCount ${this.state.isLike ? 'like' : ''}`}>{entry.collectionCount}</span>
                     </div>
                   </a>
