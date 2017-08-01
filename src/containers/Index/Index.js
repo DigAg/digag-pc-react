@@ -37,20 +37,24 @@ export default class Index extends Component {
               {/*<div>1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd</div>*/}
             {/*</div>*/}
             <div className="main">
-              <Tabs activeName="2" onTabClick={ (tab) => console.log(tab.props.name) }>
-                {
-                  ['热门','最新','评论'].map((pane, index) => {
-                    return(
-                      <Tabs.Pane label={pane} name={index.toString()} key={pane}>
-                        {
-                          this.props.entries.map(entry => {
-                            return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>
-                          })
-                        }
-                      </Tabs.Pane>
-                    );
-                  })
-                }
+              <Tabs activeName="最新" onTabClick={ (tab) => console.log(tab.props.name) }>
+                <Tabs.Pane label={'热门'} name={'热门'} key={'热门'}>
+                  {
+
+                  }
+                </Tabs.Pane>
+                <Tabs.Pane label={'最新'} name={'最新'} key={'最新'}>
+                  {
+                    this.props.entries.map(entry => {
+                      return <Entry key={entry.id} entry={Object.assign({}, entry)} onClick={this.props.likeEntryAction}/>
+                    })
+                  }
+                </Tabs.Pane>
+                <Tabs.Pane label={'评论'} name={'评论'} key={'评论'}>
+                  {
+
+                  }
+                </Tabs.Pane>
               </Tabs>
             </div>
             <div className="sidebar">

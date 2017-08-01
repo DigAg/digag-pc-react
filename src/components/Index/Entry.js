@@ -6,6 +6,7 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './Entry.css';
+import classNames from "classnames";
 
 export default class Entry extends Component {
 
@@ -21,34 +22,31 @@ export default class Entry extends Component {
     this.props.onClick(this.props.entry.id);
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     console.log('entries', this.props.entry.id);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextProps.entry.collectionCount !== this.props.entry.collectionCount
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.entry.collectionCount !== this.props.entry.collectionCount
+  }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.entry.collectionCount > this.state.collectionCount) {
+    if (nextProps.entry.collectionCount > this.props.entry.collectionCount) {
       this.setState({isLike: true});
     }
-    if (nextProps.entry.collectionCount < this.state.collectionCount) {
+    if (nextProps.entry.collectionCount < this.props.entry.collectionCount) {
       this.setState({isLike: false});
     }
   }
 
-  render(){
-
-    const entry = this.props.entry;
-
-    return(
+  render() {
+    return (
       <div className="entry">
-        <a href={`${entry.originalUrl}`} target="_blank" rel="noopener noreferrer">
+        <a href={`${this.props.entry.originalUrl}`} target="_blank" rel="noopener noreferrer">
           <div className="content-box">
             <div className="info-box">
-              <div className="meta-row">专栏-test-{moment(entry.createdAt).startOf('hour').fromNow()}</div>
-              <div className="title-row">{entry.title}</div>
+              <div className="meta-row">专栏-test-{moment(this.props.entry.createdAt).startOf('hour').fromNow()}</div>
+              <div className="title-row">{this.props.entry.title}</div>
               <div className="action-row">
                 <div className="entry-item">
                   <a href="javascript:void(0)">
@@ -56,8 +54,10 @@ export default class Entry extends Component {
                       <img src={`${this.state.isLike
                         ? "//gold-cdn.xitu.io/v3/static/img/liked.6137140.svg"
                         :
-                        "//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg"}`}  alt="喜欢"/>
-                      <span className={`entry-collectionCount ${this.state.isLike ? 'like' : ''}`}>{entry.collectionCount}</span>
+                        "//gold-cdn.xitu.io/v3/static/img/like.4bf00fb.svg"}`} alt="喜欢"/>
+                      <span className={classNames({'entry-collectionCount': true, 'liked': this.state.isLike})}>
+                        {this.props.entry.collectionCount}
+                      </span>
                     </div>
                   </a>
                 </div>
@@ -66,7 +66,7 @@ export default class Entry extends Component {
             <div className="thumb">
               <img className="thumb"
                    alt="封面"
-                src="https://user-gold-cdn.xitu.io/2017/7/12/4b5019181a1aa3729b5e36b41aecf6a2?imageView2/1/w/120/h/120/q/85/interlace/1"/>
+                   src="https://user-gold-cdn.xitu.io/2017/7/12/4b5019181a1aa3729b5e36b41aecf6a2?imageView2/1/w/120/h/120/q/85/interlace/1"/>
             </div>
           </div>
         </a>

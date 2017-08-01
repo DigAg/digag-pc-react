@@ -80,6 +80,6 @@
   color: #8c939d;
 }
 
-.entry-collectionCount .like{
-  color: #1dc400;
+.liked{
+  color: #1dc400 !important;
 }

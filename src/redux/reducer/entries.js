@@ -53,9 +53,9 @@ export const entries = (state = initialState, action = {}) => {
         'oldEntry': action.data
       });
     case UPDATE_ENTRY_SUCCESS:
-      entries = state.get('entries');
+      entries = state.get('entries').concat();
       entries[entries.findIndex(entry => entry.id === action.data.id)] = action.data;
-      return state.set('entries', entries.concat());
+      return state.set('entries', entries);
     case UPDATE_ENTRY_FAILURE:
       return state.merge({
         'error': action.data,
@@ -66,10 +66,10 @@ export const entries = (state = initialState, action = {}) => {
         'eid': action.data
       });
     case LIKE_RESULT_ENTRY:
-      entries = state.get('entries');
+      entries = state.get('entries').concat();
       let likeEntry = entries[entries.findIndex(entry => entry.id === action.data.eid)];
       likeEntry.collectionCount = Number(action.data.count) + Number(likeEntry.collectionCount);
-      return state.set('entries', entries.concat());
+      return state.set('entries', entries);
     default:
       return state
   }
