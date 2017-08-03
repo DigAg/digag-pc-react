@@ -14,13 +14,15 @@ import {
   UPDATE_ENTRY_SUCCESS,
   UPDATE_ENTRY_FAILURE, LIKE_ENTRY, LIKE_RESULT_ENTRY
 } from '../action/entries';
+import {Entry} from '../record/models';
+import {convertArrayToRecordMap} from "../../utils/common";
 
 
 const initialState = Immutable.fromJS({
   newEntry: null,
   error: null,
   saveSuccess: false,
-  entries: [],
+  entries: new Immutable.Map(),
   oldEntry: null,
   eid: null,
 });
@@ -44,7 +46,7 @@ export const entries = (state = initialState, action = {}) => {
         'error': null,
       });
     case FIND_ALL_ENTRIES_SUCCESS:
-      return state.set('entries', action.data.content);
+      return state.set('entries', convertArrayToRecordMap(action.data.content, Entry));
     case FIND_ALL_ENTRIES_FAILURE:
       return state.set('error', action.data);
     case UPDATE_ENTRY:
@@ -53,9 +55,7 @@ export const entries = (state = initialState, action = {}) => {
         'oldEntry': action.data
       });
     case UPDATE_ENTRY_SUCCESS:
-      entries = state.get('entries').concat();
-      entries[entries.findIndex(entry => entry.id === action.data.id)] = action.data;
-      return state.set('entries', entries);
+      return state.update('entries', map => map.set(action.data.id, new Entry(action.data)));
     case UPDATE_ENTRY_FAILURE:
       return state.merge({
         'error': action.data,
@@ -66,10 +66,10 @@ export const entries = (state = initialState, action = {}) => {
         'eid': action.data
       });
     case LIKE_RESULT_ENTRY:
-      entries = state.get('entries').concat();
-      let likeEntry = entries[entries.findIndex(entry => entry.id === action.data.eid)];
-      likeEntry.collectionCount = Number(action.data.count) + Number(likeEntry.collectionCount);
-      return state.set('entries', entries);
+      entries = state.get('entries');
+      const likeEntry = entries.get(action.data.eid);
+      return state.update('entries', map => map.set(action.data.eid,
+        likeEntry.set('collectionCount',Number(action.data.count) + Number(likeEntry.collectionCount))));
     default:
       return state
   }

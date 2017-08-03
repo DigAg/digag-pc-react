@@ -45,8 +45,8 @@ export default class Index extends Component {
                 </Tabs.Pane>
                 <Tabs.Pane label={'最新'} name={'最新'} key={'最新'}>
                   {
-                    this.props.entries.map(entry => {
-                      return <Entry key={entry.id} entry={Object.assign({}, entry)} onClick={this.props.likeEntryAction}/>
+                    this.props.entries.toList().map(entry => {
+                      return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>
                     })
                   }
                 </Tabs.Pane>
