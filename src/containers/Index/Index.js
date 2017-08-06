@@ -20,17 +20,40 @@ import Entry from "../../components/Index/Entry";
 )
 export default class Index extends Component {
 
-  componentWillMount() {
-    this.props.findAllEntriesAction();
+  constructor(props) {
+    super(props);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  componentDidMount() {
+    this.props.findAllEntriesAction();
+    window.addEventListener('scroll', Index.onScroll.bind(this));
+  }
+
+  static componentWillUnmount() {
+    window.removeEventListener('scroll', Index.onScroll);
+  }
+
+  shouldComponentUpdate(nextProps) {
     return nextProps.entries !== this.props.entries;
   }
 
+  static onScroll() {
+    console.log('onScroll');
+    console.log(window.pageYOffset);
+    console.log(window.innerHeight);
+    console.log(document.body.scrollHeight);
+    if ((window.pageYOffset + window.innerHeight + 100) > document.body.scrollHeight) {
+      console.log('onScroll 到底');
+    }
+  };
+
+  onScrollCapture = () => {
+    console.log('onScrollCapture');
+  };
+
   render(){
     return(
-      <div className="App">
+      <div className="App" onScroll={Index.onScroll} onScrollCapture={this.onScrollCapture}>
         <div className="App-body">
           <div className="welcome-view">
             {/*<div className="category-nav">*/}
