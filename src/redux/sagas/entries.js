@@ -58,7 +58,8 @@ export function* likeEntryAsync() {
 }
 
 export function* entriesAsync() {
-  const json = yield call(entries, 'entries');
+  const entriesMap = yield select(getEntries);
+  const json = yield call(entries, entriesMap.get('page'), entriesMap.get('size'));
   if (json.success) {
     yield put(findAllEntriesSuccessAction(json.data));
   } else {

@@ -4,7 +4,7 @@
  */
 import 'whatwg-fetch';
 
-const getURL = (url) => `http://139.224.135.86:8080/${url}`;
+const getURL = (url) => 'http://139.224.135.86:8080/' + url;
 
 export const register = (newUser) => {
   return fetch(getURL("auth/register"), {
@@ -49,8 +49,8 @@ export const entryCreate = (entry, token) => {
     .catch(ex => console.log('parsing failed', ex));
 };
 
-export const entries = () => {
-  return fetch(getURL("entries"), {
+export const entries = (page = 0, size = 15) => {
+  return fetch(getURL(`entries?page=${page}&size=${size}`), {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

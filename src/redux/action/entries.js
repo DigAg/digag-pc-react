@@ -70,9 +70,10 @@ export const updateEntryFailureAction = (error) => {
   }
 };
 
-export const findAllEntriesAction = () => {
+export const findAllEntriesAction = (page = 0, size = 10) => {
   return{
     type: FIND_ALL_ENTRIES,
+    data: {page, size}
   }
 };
 

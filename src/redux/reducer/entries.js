@@ -25,6 +25,8 @@ const initialState = Immutable.fromJS({
   entries: new Immutable.Map(),
   oldEntry: null,
   eid: null,
+  page: 0,
+  size: 15
 });
 
 export const entries = (state = initialState, action = {}) => {
@@ -42,11 +44,12 @@ export const entries = (state = initialState, action = {}) => {
       return state.set('error', action.data);
     case FIND_ALL_ENTRIES:
       return state.merge({
-        'entries': [],
         'error': null,
+        'page': action.data.page,
+        'size': action.data.size
       });
     case FIND_ALL_ENTRIES_SUCCESS:
-      return state.set('entries', convertArrayToRecordMap(action.data.content, Entry));
+      return state.set('entries', state.get('entries').concat(convertArrayToRecordMap(action.data.content, Entry)));
     case FIND_ALL_ENTRIES_FAILURE:
       return state.set('error', action.data);
     case UPDATE_ENTRY:

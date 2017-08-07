@@ -22,28 +22,48 @@ export default class Index extends Component {
 
   constructor(props) {
     super(props);
+    this.onScroll = this.onScroll.bind(this);
+    this.page = 0;
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log('componentDidMount');
     this.props.findAllEntriesAction();
-    window.addEventListener('scroll', Index.onScroll.bind(this));
+    window.addEventListener('scroll', this.throttle(this.onScroll, 500, 1000), { passive: true });
   }
 
-  static componentWillUnmount() {
-    window.removeEventListener('scroll', Index.onScroll);
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+    window.removeEventListener('scroll', this.throttle(this.onScroll, 500, 1000), { passive: true });
   }
 
   shouldComponentUpdate(nextProps) {
     return nextProps.entries !== this.props.entries;
   }
 
-  static onScroll() {
+  throttle = (func, wait, mustRun) => {
+    let timeout, startTime = new Date();
+
+    return () => {
+      let args = arguments, curTime = new Date();
+      clearTimeout(timeout);
+      // 如果达到了规定的触发时间间隔，触发 handler
+      if(curTime - startTime >= mustRun){
+        func.apply(this,args);
+        startTime = curTime;
+        // 没达到触发间隔，重新设定定时器
+      }else{
+        timeout = setTimeout(func, wait);
+      }
+    };
+  };
+
+  onScroll() {
     console.log('onScroll');
-    console.log(window.pageYOffset);
-    console.log(window.innerHeight);
-    console.log(document.body.scrollHeight);
-    if ((window.pageYOffset + window.innerHeight + 100) > document.body.scrollHeight) {
+    if ((window.pageYOffset + window.innerHeight + 1) > document.body.scrollHeight) {
       console.log('onScroll 到底');
+      this.page++;
+      this.props.findAllEntriesAction(this.page);
     }
   };
 
