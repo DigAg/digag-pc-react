@@ -67,10 +67,6 @@ export default class Index extends Component {
     }
   };
 
-  onScrollCapture = () => {
-    console.log('onScrollCapture');
-  };
-
   render(){
     return(
       <div className="App" onScroll={Index.onScroll} onScrollCapture={this.onScrollCapture}>
@@ -88,7 +84,12 @@ export default class Index extends Component {
                 </Tabs.Pane>
                 <Tabs.Pane label={'最新'} name={'最新'} key={'最新'}>
                   {
-                    this.props.entries.toList().map(entry => {
+                    this.props.entries.sort((a, b) => {
+                      if (a.createdAt < b.createdAt) { return 1; }
+                      if (a.createdAt > b.createdAt) { return -1; }
+                      if (a.createdAt=== b.createdAt) { return 0; }
+                      return 0;
+                    }).toList().map(entry => {
                       return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>
                     })
                   }

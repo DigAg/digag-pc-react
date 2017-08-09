@@ -2,7 +2,7 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, {Component} from 'react';
-import {Button, Input, Menu} from "element-react";
+import {Button, Input, Menu, Dropdown, Notification} from "element-react";
 import RegisterDialog from '../../components/Header/RegisterDialog';
 import LoginDialog from '../../components/Header/LoginDialog';
 import {connect} from "react-redux";
@@ -75,6 +75,24 @@ export default class Header extends Component {
     this.setState({registerDialog: true})
   };
 
+  handleCommand = (command) => {
+    switch (command) {
+      case 'index':
+        console.log(command);
+        break;
+      case 'logout':
+        localStorage.removeItem('token');
+        Notification({
+          title: '退出登陆',
+          message: '你已退出登陆'
+        });
+        this.forceUpdate();
+        break;
+      default:
+        console.log(command);
+    }
+  };
+
   renderMenu() {
     if (localStorage.getItem('token')) {
       return (
@@ -86,7 +104,14 @@ export default class Header extends Component {
             <i className="el-icon-message"/>
           </Menu.Item>
           <Menu.Item index="9">
-            <img src={portrait} alt="头像" className="portrait"/>
+            <Dropdown onCommand={this.handleCommand} trigger="click" menu={(
+              <Dropdown.Menu>
+                <Dropdown.Item command="index">我的主页</Dropdown.Item>
+                <Dropdown.Item command="logout">退出登陆</Dropdown.Item>
+              </Dropdown.Menu>
+            )}>
+             <img src={portrait} alt="头像" className="portrait"/>
+            </Dropdown>
           </Menu.Item>
         </div>
       )
