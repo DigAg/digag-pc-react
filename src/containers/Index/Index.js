@@ -14,6 +14,7 @@ import Entry from "../../components/Index/Entry";
     return ({
       entries: state.entries.get('entries'),
       error: state.entries.get('error'),
+      last: state.entries.get('last'),
     });
   },
   {findAllEntriesAction, likeEntryAction}
@@ -62,8 +63,10 @@ export default class Index extends Component {
     console.log('onScroll');
     if ((window.pageYOffset + window.innerHeight + 1) > document.body.scrollHeight) {
       console.log('onScroll 到底');
-      this.page++;
-      this.props.findAllEntriesAction(this.page);
+      if (!this.props.last) {
+        this.page++;
+        this.props.findAllEntriesAction(this.page);
+      }
     }
   };
 
