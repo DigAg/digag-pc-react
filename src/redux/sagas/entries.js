@@ -59,7 +59,8 @@ export function* likeEntryAsync() {
 
 export function* entriesAsync() {
   const entriesMap = yield select(getEntries);
-  const json = yield call(entries, entriesMap.get('page'), entriesMap.get('size'));
+  const token = localStorage.getItem('token');
+  const json = yield call(entries, entriesMap.get('page'), entriesMap.get('size'), token);
   if (json.success) {
     yield put(findAllEntriesSuccessAction(json.data));
   } else {

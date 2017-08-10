@@ -49,12 +49,16 @@ export const entryCreate = (entry, token) => {
     .catch(ex => console.log('parsing failed', ex));
 };
 
-export const entries = (page = 0, size = 15) => {
+export const entries = (page = 0, size = 15, token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
   return fetch(getURL(`entries?page=${page}&size=${size}`), {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    }
+    headers: headers
   }).then(response => response.json())
     .then(json => {
       return json;
