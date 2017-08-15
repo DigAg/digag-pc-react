@@ -7,6 +7,7 @@ import './App.css';
 import Index from "../Index/Index";
 import Header from "../Header/Header";
 import SubmitEntry from "../SubmitEntry/SubmitEntry";
+import User from "../User/User";
 
 export default class App extends Component {
 
@@ -17,6 +18,7 @@ export default class App extends Component {
         <Route component={Header}/>
         <Route exact path="/" component={Index}/>
         <Route exact path="/submit-entry" component={SubmitEntry}/>
+        <Route exact path="/user" component={User}/>
       </div>
     </Router>
     )

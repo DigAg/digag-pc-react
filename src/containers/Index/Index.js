@@ -7,7 +7,7 @@ import './Index.css';
 import {findAllEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
 import {Tabs} from "element-react";
-import Entry from "../../components/Index/Entry";
+import Entry from "../../components/Entry/Entry";
 
 @connect(
   (state) => {
@@ -93,7 +93,7 @@ export default class Index extends Component {
                       if (a.createdAt=== b.createdAt) { return 0; }
                       return 0;
                     }).toList().map(entry => {
-                      return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>
+                      return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>;
                     })
                   }
                 </Tabs.Pane>
