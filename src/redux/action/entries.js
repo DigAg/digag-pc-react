@@ -13,6 +13,9 @@ export const UPDATE_ENTRY_FAILURE = 'UPDATE_ENTRY_FAILURE';
 export const FIND_ALL_ENTRIES = 'FIND_ALL_ENTRIES';
 export const FIND_ALL_ENTRIES_SUCCESS = 'FIND_ALL_ENTRIES_SUCCESS';
 export const FIND_ALL_ENTRIES_FAILURE = 'FIND_ALL_ENTRIES_FAILURE';
+export const FIND_USER_ENTRIES = 'FIND_USER_ENTRIES';
+export const FIND_USER_ENTRIES_SUCCESS = 'FIND_USER_ENTRIES_SUCCESS';
+export const FIND_USER_ENTRIES_FAILURE = 'FIND_USER_ENTRIES_FAILURE';
 
 export const likeEntryAction = (eid) => {
   return{
@@ -87,6 +90,27 @@ export const findAllEntriesSuccessAction = (entries) => {
 export const findAllEntriesFailureAction = (error) => {
   return{
     type: FIND_ALL_ENTRIES_FAILURE,
+    data: error,
+  }
+};
+
+export const findUserEntriesAction = (page = 0, size = 10, username) => {
+  return{
+    type: FIND_USER_ENTRIES,
+    data: {page, size, username}
+  }
+};
+
+export const findUserEntriesSuccessAction = (entriesByUser) => {
+  return{
+    type: FIND_USER_ENTRIES_SUCCESS,
+    data: entriesByUser,
+  }
+};
+
+export const findUserEntriesFailureAction = (error) => {
+  return{
+    type: FIND_USER_ENTRIES_FAILURE,
     data: error,
   }
 };

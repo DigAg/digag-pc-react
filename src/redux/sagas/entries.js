@@ -10,9 +10,11 @@ import {
   findAllEntriesSuccessAction,
   findAllEntriesFailureAction,
   updateEntrySuccessAction,
-  updateEntryFailureAction, likeEntryResultAction
+  updateEntryFailureAction, likeEntryResultAction,
+  findUserEntriesSuccessAction,
+  findUserEntriesFailureAction,
 } from '../action/entries';
-import {entryCreate, entries, updateEntry, likeEntry} from './api';
+import {entryCreate, entries, updateEntry, likeEntry, entriesByUser} from './api';
 import 'whatwg-fetch';
 
 export function* createEntryAsync() {
@@ -66,6 +68,17 @@ export function* entriesAsync() {
   } else {
     console.log('entriesAsync', json.error);
     yield put(findAllEntriesFailureAction('获取条目列表失败'));
+  }
+}
+
+export function* entriesByUserAsync() {
+  const entriesMap = yield select(getEntries);
+  const json = yield call(entriesByUser, entriesMap.get('page'), entriesMap.get('size'), entriesMap.get('username'));
+  if (json.success) {
+    yield put(findUserEntriesSuccessAction(json.data));
+  } else {
+    console.log('entriesAsync', json.error);
+    yield put(findUserEntriesFailureAction('获取用户投稿条目列表失败'));
   }
 }
 

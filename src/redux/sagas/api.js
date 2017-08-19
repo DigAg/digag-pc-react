@@ -66,6 +66,20 @@ export const entries = (page = 0, size = 15, token) => {
     .catch(ex => console.log('parsing failed', ex));
 };
 
+export const entriesByUser = (page = 0, size = 15, username) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  return fetch(getURL(`entries/user?page=${page}&size=${size}&username=${username}`), {
+    method: 'GET',
+    headers: headers
+  }).then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(ex => console.log('parsing failed', ex));
+};
+
 export const updateEntry = (entry, token) => {
   return fetch(getURL(`entries/${entry.get('id')}`), {
     method: 'PUT',

@@ -18,7 +18,7 @@ export default class App extends Component {
         <Route component={Header}/>
         <Route exact path="/" component={Index}/>
         <Route exact path="/submit-entry" component={SubmitEntry}/>
-        <Route exact path="/user" component={User}/>
+        <Route exact path="/user/:username" component={User}/>
       </div>
     </Router>
     )

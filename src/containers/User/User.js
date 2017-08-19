@@ -4,24 +4,24 @@
  */
 import React, { Component } from 'react';
 import './User.css';
-import {findAllEntriesAction, likeEntryAction} from '../../redux/action/entries';
+import {findUserEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
 import Entry from "../../components/Entry/Entry";
 
 @connect(
   (state) => {
     return ({
-      entries: state.entries.get('entries'),
+      entriesByUser: state.entries.get('entriesByUser'),
       error: state.entries.get('error'),
       last: state.entries.get('last'),
     });
   },
-  {findAllEntriesAction, likeEntryAction}
+  {findUserEntriesAction, likeEntryAction}
 )
 export default class User extends Component {
 
   componentWillMount() {
-    this.props.findAllEntriesAction();
+    this.props.findUserEntriesAction(0, 10, this.props.match.params.username);
   }
 
   render() {
@@ -32,7 +32,7 @@ export default class User extends Component {
         </div>
         <div className="user-entries">
           {
-            this.props.entries.sort((a, b) => {
+            this.props.entriesByUser.sort((a, b) => {
               if (a.createdAt < b.createdAt) { return 1; }
               if (a.createdAt > b.createdAt) { return -1; }
               if (a.createdAt=== b.createdAt) { return 0; }

@@ -10,7 +10,7 @@ export default class LoginDialog extends Component {
     super(props);
     this.state = {
       user: {
-        username: '',
+        account: '',
         password: '',
       },
       loading: false,
@@ -75,11 +75,11 @@ export default class LoginDialog extends Component {
       >
         <Dialog.Body>
           <Form ref="user" model={this.state.user} className="demo-form-inline">
-            <Form.Item required={true} prop="username"
+            <Form.Item required={true} prop="account"
                        rules={{required: true, message: '邮箱不能为空或格式不正确', trigger: 'blur'}}
             >
-              <Input value={this.state.user.username} placeholder="请填写邮箱"
-                     onChange={this.handleChange.bind(this, 'username')}/>
+              <Input value={this.state.user.account} placeholder="请填写邮箱"
+                     onChange={this.handleChange.bind(this, 'account')}/>
             </Form.Item>
             <Form.Item required={true} prop="password"
                        rules={{required: true, message: '密码不能为空', trigger: 'blur'}}
