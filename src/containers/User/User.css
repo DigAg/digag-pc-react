@@ -10,6 +10,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.user-img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.user-portrait {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  display: inline-block;
+  background-position: 50%;
+  background-size: cover;
+  margin-top: 1.4rem;
+}
+
+.user-username {
+  margin: 5rem;
 }
 
 .user-entries {

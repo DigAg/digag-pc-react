@@ -36,6 +36,14 @@
   color: #b2bac2;
 }
 
+.meta-row a {
+  color: #969da4;
+}
+
+.meta-row a:hover {
+  color: #0089dc;
+}
+
 .title-row {
   margin: .5rem 0 1rem;
   white-space: nowrap;
@@ -73,6 +81,10 @@
   align-items: center;
   padding: 0 .8rem;
   height: 100%;
+}
+
+.entry-title-box:hover {
+  background-color: #dee9f8;
 }
 
 .entry-collectionCount {

@@ -26,7 +26,6 @@ const initialState = Immutable.fromJS({
   error: null,
   saveSuccess: false,
   entries: new Immutable.Map(),
-  entriesByUser: new Immutable.Map(),
   oldEntry: null,
   eid: null,
   page: 0,
@@ -67,10 +66,11 @@ export const entries = (state = initialState, action = {}) => {
         'page': action.data.page,
         'size': action.data.size,
         'username': action.data.username,
+        'entries': new Immutable.Map(),
       });
     case FIND_USER_ENTRIES_SUCCESS:
       return state.merge({
-        'entriesByUser': state.get('entriesByUser').concat(convertArrayToRecordMap(action.data.content, Entry)),
+        'entries': state.get('entries').concat(convertArrayToRecordMap(action.data.content, Entry)),
         'last': action.data.last
       });
     case FIND_USER_ENTRIES_FAILURE:

@@ -45,7 +45,9 @@ export default class Entry extends Component {
         <a href={`${this.props.entry.originalUrl}`} target="_blank" rel="noopener noreferrer">
           <div className="content-box">
             <div className="info-box">
-              <div className="meta-row">专栏-test-{moment(this.props.entry.createdAt).startOf('hour').fromNow()}</div>
+              <div className="meta-row">
+                <a href={`/user/${this.props.entry.author}`}>专栏-{this.props.entry.author}</a>
+                -{moment(this.props.entry.createdAt).startOf('hour').fromNow()}</div>
               <div className="title-row">{this.props.entry.title}</div>
               <div className="action-row">
                 <div className="entry-item">

@@ -28,13 +28,11 @@ export default class Index extends Component {
   }
 
   componentWillMount() {
-    console.log('componentDidMount');
     this.props.findAllEntriesAction();
     window.addEventListener('scroll', this.throttle(this.onScroll, 500, 1000), { passive: true });
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount');
     window.removeEventListener('scroll', this.throttle(this.onScroll, 500, 1000), { passive: true });
   }
 
@@ -60,9 +58,7 @@ export default class Index extends Component {
   };
 
   onScroll() {
-    console.log('onScroll');
     if ((window.pageYOffset + window.innerHeight + 1) > document.body.scrollHeight) {
-      console.log('onScroll 到底');
       if (!this.props.last) {
         this.page++;
         this.props.findAllEntriesAction(this.page);

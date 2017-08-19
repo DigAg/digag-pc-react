@@ -7,11 +7,12 @@ import './User.css';
 import {findUserEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
 import Entry from "../../components/Entry/Entry";
+import portrait from '../../assets/images/portrait.jpg';
 
 @connect(
   (state) => {
     return ({
-      entriesByUser: state.entries.get('entriesByUser'),
+      entriesByUser: state.entries.get('entries'),
       error: state.entries.get('error'),
       last: state.entries.get('last'),
     });
@@ -20,15 +21,25 @@ import Entry from "../../components/Entry/Entry";
 )
 export default class User extends Component {
 
+  constructor(props) {
+    super(props);
+    this.username = this.props.match.params.username;
+  }
+
   componentWillMount() {
-    this.props.findUserEntriesAction(0, 10, this.props.match.params.username);
+    this.props.findUserEntriesAction(0, 10, this.username);
   }
 
   render() {
     return(
       <div className="user-main">
         <div className="user-info">
-          user-info
+          <div className="user-img">
+            <img src={portrait} alt="头像" className="user-portrait"/>
+          </div>
+          <div className="user-username">
+            {this.username}
+          </div>
         </div>
         <div className="user-entries">
           {
