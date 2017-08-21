@@ -3,8 +3,23 @@
  */
 import {select, put, call} from 'redux-saga/effects';
 import {getAuth, getUsers} from './selectors';
-import {loginSuccessAction, loginFailureAction, registerSuccessAction, registerFailureAction} from '../action/users';
-import {login, register} from './api';
+import {loginSuccessAction, loginFailureAction, registerSuccessAction, registerFailureAction,
+  currentUserAction, currentUserFailureAction, currentUserSuccessAction
+} from '../action/users';
+import {login, register, currentUser} from './api';
+
+export function* currentUserAsync() {
+  const users = yield select(getUsers);
+  const token = users.get('token');
+
+  const json = yield call(currentUser, token);
+  if (json.success) {
+    yield put(currentUserSuccessAction(true));
+  } else {
+    console.log('currentUserAsync', json.error);
+    yield put(currentUserFailureAction(json.error));
+  }
+}
 
 export function* registerUserAsync() {
   const users = yield select(getUsers);
@@ -17,7 +32,6 @@ export function* registerUserAsync() {
     console.log('registerUserAsync', json.error);
     yield put(registerFailureAction('注册失败,用户名或帐号已存在！'));
   }
-
 }
 
 export function* loginUserAsync() {

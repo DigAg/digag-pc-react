@@ -6,6 +6,20 @@ import 'whatwg-fetch';
 
 const getURL = (url) => 'http://139.224.135.86:8080/' + url;
 
+export const currentUser = (token) => {
+  return fetch(getURL("users/current"), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  }).then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(ex => console.log('parsing failed', ex));
+};
+
 export const register = (newUser) => {
   return fetch(getURL("auth/register"), {
     method: 'POST',
