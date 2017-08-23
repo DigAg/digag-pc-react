@@ -44,10 +44,14 @@
 
 .nav-menu ul{
   background-color: white;
+  border-bottom: 0 solid white !important;
+  /*margin-top: -0.3rem;*/
 }
 
 .nav-menu ul li{
   font-size: 1.33rem;
+  border-bottom: 0 solid white !important;
+  /*top: 12px !important;*/
 }
 
 .nav-menu ul li:hover{
@@ -69,7 +73,7 @@
   content: "|";
   position: absolute;
   color: hsla(0,0%,59%,.4);
-  top: 24px;
+  top: 15px;
   left: 100%;
   z-index: 1;
 }
@@ -90,5 +94,5 @@
   display: inline-block;
   background-position: 50%;
   background-size: cover;
-  margin-top: 1.4rem;
+  /*margin-top: 1.4rem;*/
 }

@@ -2,7 +2,8 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, {Component} from 'react';
-import {Button, Input, Menu, Dropdown, Notification} from "element-react";
+import {Button, Notification} from "element-react";
+import {Menu, Input, Icon, Dropdown} from 'antd';
 import RegisterDialog from '../../components/Header/RegisterDialog';
 import LoginDialog from '../../components/Header/LoginDialog';
 import {connect} from "react-redux";
@@ -30,8 +31,8 @@ export default class Header extends Component {
     };
   }
 
-  handleSelect = (index) => {
-    switch (index) {
+  handleSelect = ({key}) => {
+    switch (key) {
       case 'edit':
         this.props.history.push('/submit-entry');
         break;
@@ -39,7 +40,7 @@ export default class Header extends Component {
         this.props.history.push('/');
         break;
       default:
-        console.log(index);
+        console.log(key);
     }
   };
 
@@ -75,10 +76,14 @@ export default class Header extends Component {
     this.setState({registerDialog: true})
   };
 
-  handleCommand = (command) => {
-    switch (command) {
+  handleInput = (value) => {
+    this.setState({searchInput: value.target.value});
+  };
+
+  handleCommand = ({key}) => {
+    switch (key) {
       case 'index':
-        console.log(command);
+        console.log(key);
         break;
       case 'logout':
         localStorage.removeItem('token');
@@ -89,49 +94,45 @@ export default class Header extends Component {
         this.forceUpdate();
         break;
       default:
-        console.log(command);
+        console.log(key);
     }
   };
 
   renderMenu() {
     if (localStorage.getItem('token')) {
-      return (
-        <div style={{display: 'flex'}}>
-          <Menu.Item index="edit">
-            <i className="el-icon-plus"/>
-          </Menu.Item>
-          <Menu.Item index="8">
-            <i className="el-icon-message"/>
-          </Menu.Item>
-          <Menu.Item index="9">
-            <Dropdown onCommand={this.handleCommand} trigger="click" menu={(
-              <Dropdown.Menu>
-                <Dropdown.Item command="index">我的主页</Dropdown.Item>
-                <Dropdown.Item command="logout">退出登陆</Dropdown.Item>
-              </Dropdown.Menu>
-            )}>
-             <img src={portrait} alt="头像" className="portrait"/>
-            </Dropdown>
-          </Menu.Item>
-        </div>
-      )
+      return [
+        <Menu.Item key="edit">
+          <i className="el-icon-plus"/>
+        </Menu.Item>,
+        <Menu.Item key="8">
+          <i className="el-icon-message"/>
+        </Menu.Item>,
+        <Menu.Item key="9">
+          <Dropdown trigger={['click']} overlay={(
+            <Menu onClick={this.handleCommand}>
+              <Menu.Item key="index">我的主页</Menu.Item>
+              <Menu.Item key="logout">退出登陆</Menu.Item>
+            </Menu>
+          )}>
+            <div>
+              <img src={portrait} alt="头像" className="portrait"/>
+            </div>
+          </Dropdown>
+        </Menu.Item>]
     } else {
-      return (
-        <div style={{display: 'flex'}}>
-          <Menu.Item index="7">
-            <Button type="text" icon="edit"
-                    className="contribute"
-                    onClick={this.handleLogin}>
-              投稿
-            </Button>
-          </Menu.Item>
-          <Menu.Item index="8">
-            <Button type="text" className="login-btn"
-                    onClick={ this.handleLogin }>登录</Button>
-            <Button type="text" onClick={ this.handleRegister }>注册</Button>
-          </Menu.Item>
-        </div>
-      )
+      return [
+        <Menu.Item key="7">
+          <Button type="text" icon="edit"
+                  className="contribute"
+                  onClick={this.handleLogin}>
+            投稿
+          </Button>
+        </Menu.Item>,
+        <Menu.Item key="8">
+          <Button type="text" className="login-btn"
+                  onClick={ this.handleLogin }>登录</Button>
+          <Button type="text" onClick={ this.handleRegister }>注册</Button>
+        </Menu.Item>]
     }
   };
 
@@ -144,19 +145,19 @@ export default class Header extends Component {
               <img src="//gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="掘金" className="logo-img"/>
             </a>
             <div className="nav-menu">
-              <Menu defaultActive="1" mode="horizontal" onSelect={this.handleSelect}>
-                <Menu.Item index="index">首页</Menu.Item>
-                <Menu.Item index="2">专栏</Menu.Item>
-                <Menu.Item index="3">收藏集</Menu.Item>
-                <Menu.Item index="4">发现</Menu.Item>
-                <Menu.Item index="5">标签</Menu.Item>
-                <Menu.Item index="6">
+              <Menu defaultSelectedKeys={["index"]} mode="horizontal" onClick={this.handleSelect}>
+                <Menu.Item key="index">首页</Menu.Item>
+                <Menu.Item key="2">专栏</Menu.Item>
+                <Menu.Item key="3">收藏集</Menu.Item>
+                <Menu.Item key="4">发现</Menu.Item>
+                <Menu.Item key="5">标签</Menu.Item>
+                <Menu.Item key="6">
                   <Input
-                    size="small"
                     icon="search"
+                    suffix={<Icon type="search" onClick={this.handleIconClick}/>}
                     placeholder="搜索掘金"
-                    onIconClick={this.handleIconClick}
-                    onChange={(value) => this.setState({searchInput: value})}
+                    onPressEnter={this.handleIconClick}
+                    onChange={this.handleInput}
                   />
                 </Menu.Item>
                 {this.renderMenu()}
