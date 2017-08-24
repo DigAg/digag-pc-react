@@ -6,8 +6,10 @@ import React, { Component } from 'react';
 import './Index.css';
 import {findAllEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
-import {Tabs} from "element-react";
+import {Tabs} from "antd";
 import Entry from "../../components/Entry/Entry";
+
+const TabPane = Tabs.TabPane;
 
 @connect(
   (state) => {
@@ -75,13 +77,13 @@ export default class Index extends Component {
               {/*<div>1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd</div>*/}
             {/*</div>*/}
             <div className="main">
-              <Tabs activeName="最新" onTabClick={ (tab) => console.log(tab.props.name) }>
-                <Tabs.Pane label={'热门'} name={'热门'} key={'热门'}>
+              <Tabs defaultActiveKey="最新">
+                <TabPane  tab={'热门'} key={'热门'}>
                   {
 
                   }
-                </Tabs.Pane>
-                <Tabs.Pane label={'最新'} name={'最新'} key={'最新'}>
+                </TabPane >
+                <TabPane  tab={'最新'} key={'最新'}>
                   {
                     this.props.entries.sort((a, b) => {
                       if (a.createdAt < b.createdAt) { return 1; }
@@ -92,12 +94,12 @@ export default class Index extends Component {
                       return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>;
                     })
                   }
-                </Tabs.Pane>
-                <Tabs.Pane label={'评论'} name={'评论'} key={'评论'}>
+                </TabPane >
+                <TabPane  tab={'评论'} key={'评论'}>
                   {
 
                   }
-                </Tabs.Pane>
+                </TabPane >
               </Tabs>
             </div>
             <div className="sidebar">

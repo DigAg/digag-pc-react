@@ -3,7 +3,8 @@
  * https://github.com/Yuicon
  */
 import React, {Component} from 'react';
-import {Button, Form, Input, Switch, Notification} from "element-react";
+import {Button, Form, Input, Switch} from "element-react";
+import { message } from 'antd';
 import {connect} from "react-redux";
 import {createEntryAction} from '../../redux/action/entries';
 import './SubmitEntry.css';
@@ -36,11 +37,7 @@ export default class SubmitEntry extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.entries.get('saveSuccess')) {
-      Notification.success({
-        title: '成功',
-        message: '投稿成功',
-        duration: 1500
-      });
+      message.success('投稿成功');
       this.setState({form: {
         title: '',
         content: '',
@@ -50,12 +47,7 @@ export default class SubmitEntry extends Component {
         type: 'article',
       }});
     } else if (nextProps.entries.get('error')) {
-      Notification.error({
-        title: '错误',
-        message: nextProps.entries.get('error'),
-        type: 'success',
-        duration: 1500
-      });
+      message.error(nextProps.entries.get('error'));
     }
     this.setState({loading: false});
   }

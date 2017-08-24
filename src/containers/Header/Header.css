@@ -54,6 +54,14 @@
   /*top: 12px !important;*/
 }
 
+.header-login {
+  padding-right: 0;
+}
+
+.header-register {
+  padding: 0;
+}
+
 .nav-menu ul li:hover{
   border-bottom: 0 solid white !important;
   background-color: white !important;
@@ -73,7 +81,6 @@
   content: "|";
   position: absolute;
   color: hsla(0,0%,59%,.4);
-  top: 15px;
   left: 100%;
   z-index: 1;
 }

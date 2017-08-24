@@ -2,8 +2,7 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, {Component} from 'react';
-import {Button, Notification} from "element-react";
-import {Menu, Input, Icon, Dropdown} from 'antd';
+import {Menu, Input, Icon, Dropdown, message} from 'antd';
 import RegisterDialog from '../../components/Header/RegisterDialog';
 import LoginDialog from '../../components/Header/LoginDialog';
 import {connect} from "react-redux";
@@ -39,6 +38,15 @@ export default class Header extends Component {
       case 'index':
         this.props.history.push('/');
         break;
+      case 'login':
+        this.setState({loginDialog: true});
+        break;
+      case 'register':
+        this.setState({registerDialog: true});
+        break;
+      case 'no-login':
+        this.setState({loginDialog: true});
+        break;
       default:
         console.log(key);
     }
@@ -68,14 +76,6 @@ export default class Header extends Component {
     }));
   };
 
-  handleLogin = () => {
-    this.setState({loginDialog: true})
-  };
-
-  handleRegister = () => {
-    this.setState({registerDialog: true})
-  };
-
   handleInput = (value) => {
     this.setState({searchInput: value.target.value});
   };
@@ -87,10 +87,7 @@ export default class Header extends Component {
         break;
       case 'logout':
         localStorage.removeItem('token');
-        Notification({
-          title: '退出登陆',
-          message: '你已退出登陆'
-        });
+        message.success('你已退出登陆');
         this.forceUpdate();
         break;
       default:
@@ -102,10 +99,10 @@ export default class Header extends Component {
     if (localStorage.getItem('token')) {
       return [
         <Menu.Item key="edit">
-          <i className="el-icon-plus"/>
+          <Icon type="plus" />
         </Menu.Item>,
         <Menu.Item key="8">
-          <i className="el-icon-message"/>
+          <Icon type="message" />
         </Menu.Item>,
         <Menu.Item key="9">
           <Dropdown trigger={['click']} overlay={(
@@ -121,17 +118,14 @@ export default class Header extends Component {
         </Menu.Item>]
     } else {
       return [
-        <Menu.Item key="7">
-          <Button type="text" icon="edit"
-                  className="contribute"
-                  onClick={this.handleLogin}>
-            投稿
-          </Button>
+        <Menu.Item key="no-login">
+          <span className="contribute"><Icon type="copy" />投稿</span>
         </Menu.Item>,
-        <Menu.Item key="8">
-          <Button type="text" className="login-btn"
-                  onClick={ this.handleLogin }>登录</Button>
-          <Button type="text" onClick={ this.handleRegister }>注册</Button>
+        <Menu.Item key="login" className="header-login">
+          <span className="login-btn">登录</span>
+        </Menu.Item>,
+        <Menu.Item key="register" className="header-register">
+          <span>注册</span>
         </Menu.Item>]
     }
   };
