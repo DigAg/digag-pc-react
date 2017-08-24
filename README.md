@@ -4,6 +4,7 @@
 [![](https://img.shields.io/github/stars/DigAg/digag-pc-react.svg)](https://github.com/DigAg/digag-pc-react/stargazers) 
 [![](https://img.shields.io/github/issues/DigAg/digag-pc-react.svg)](https://github.com/DigAg/digag-pc-react/issues)  
 [![](https://img.shields.io/github/forks/DigAg/digag-pc-react.svg)](https://github.com/DigAg/digag-pc-react/network) 
+[![](https://badge.juejin.im/entry/595706725188250d725a3960/likes.svg?style=flat-square)](https://juejin.im/entry/595706725188250d725a3960/detail)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ## [在线网站](http://139.224.135.86)
 ## 项目介绍
