@@ -61,7 +61,7 @@ export default class LoginDialog extends Component {
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
             {getFieldDecorator('account', {
-              rules: [{required: true, message: '请输入邮箱'}],
+              rules: [{required: true, message: '请输入邮箱', type: 'email'}],
             })(
               <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="邮箱"/>
             )}
