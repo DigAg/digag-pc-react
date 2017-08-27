@@ -2,56 +2,39 @@
  * Created by Yuicon on 2017/6/30.
  */
 import React, {Component} from 'react';
-import {Button, Dialog, Form, Input, Notification} from "element-react";
+import {Form, Icon, Input, Button, Modal, message} from 'antd';
 
+const FormItem = Form.Item;
+const createForm = Form.create;
+
+@createForm()
 export default class LoginDialog extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: {
-        account: '',
-        password: '',
-      },
       loading: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.auth.get('token') && this.props.visible) {
       this.props.onClose();
-      Notification.success({
-        title: '成功',
-        message: '登陆成功',
-        duration: 1500
-      });
-      this.setState({loading: false});
+      message.success('登陆成功');
     } else if (nextProps.auth.get('error') && this.props.visible) {
-      Notification.error({
-        title: '错误',
-        message: nextProps.auth.get('error'),
-        type: 'success',
-        duration: 1500
-      });
-      this.setState({loading: false});
+      message.error(nextProps.auth.get('error'));
     }
+    this.setState({loading: false});
   }
 
   handleSubmit = (e) => {
-    console.log('submit!', this.state.user);
     e.preventDefault();
-
-    this.refs.user.validate((valid) => {
-      if (valid) {
-        this.props.loginActions(this.state.user);
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.loginActions(values);
         this.setState({loading: true});
       }
-    });
-  };
-
-  handleChange = (key, value) => {
-    this.setState({
-      user: Object.assign(this.state.user, {[key]: value})
     });
   };
 
@@ -64,45 +47,46 @@ export default class LoginDialog extends Component {
   };
 
   render() {
+
+    const {getFieldDecorator} = this.props.form;
+
     return (
-      <Dialog
+      <Modal
         title="登录"
-        top="30%"
-        customClass="login-dialog"
-        closeOnClickModal={false}
+        width="26.5rem"
         visible={ this.props.visible }
         onCancel={ this.props.onClose }
+        footer={null}
       >
-        <Dialog.Body>
-          <Form ref="user" model={this.state.user} className="demo-form-inline">
-            <Form.Item required={true} prop="account"
-                       rules={{required: true, message: '邮箱不能为空或格式不正确', trigger: 'blur'}}
-            >
-              <Input value={this.state.user.account} placeholder="请填写邮箱"
-                     onChange={this.handleChange.bind(this, 'account')}/>
-            </Form.Item>
-            <Form.Item required={true} prop="password"
-                       rules={{required: true, message: '密码不能为空', trigger: 'blur'}}
-            >
-              <Input type="password" value={this.state.user.password} placeholder="请输入密码"
-                     onChange={this.handleChange.bind(this, 'password')}/>
-            </Form.Item>
-            <Form.Item>
-              <Button style={{width: '100%'}} type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
-                登录
-              </Button>
-            </Form.Item>
-            <Form.Item>
-              <Button style={{float: 'left'}} type="text" onClick={this.handleRegister}>
-                没有帐号？注册
-              </Button>
-              <Button style={{float: 'right'}} type="text" onClick={this.handleResetPassWord}>
-                忘记密码
-              </Button>
-            </Form.Item>
-          </Form>
-        </Dialog.Body>
-      </Dialog>
+
+        <Form onSubmit={this.handleSubmit} className="login-form">
+          <FormItem>
+            {getFieldDecorator('account', {
+              rules: [{required: true, message: '请输入邮箱'}],
+            })(
+              <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="邮箱"/>
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('password', {
+              rules: [{required: true, message: '请输入密码'}],
+            })(
+              <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>} type="password" placeholder="密码"/>
+            )}
+          </FormItem>
+          <Form.Item>
+            <Button style={{width: '100%'}} type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
+              登录
+            </Button>
+          </Form.Item>
+          <Button type="text" onClick={this.handleRegister}>
+            没有帐号？注册
+          </Button>
+          <Button style={{float: 'right'}} type="text" onClick={this.handleResetPassWord}>
+            忘记密码
+          </Button>
+        </Form>
+      </Modal>
     )
   }
 }

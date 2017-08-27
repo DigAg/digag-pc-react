@@ -6,3 +6,7 @@ html {
   color: #333;
   word-break: break-all;
 }
+
+body {
+  background-color: #f4f5f5;
+}

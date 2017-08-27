@@ -6,15 +6,6 @@
   box-sizing: border-box;
 }
 
-.login-dialog {
-  padding: 0;
-  margin: 0;
-  width: 23rem !important;
-  max-width: 100%;
-  font-size: 1.167rem;
-  box-sizing: border-box;
-}
-
 .App-body {
   position: relative;
   margin: 0 auto;
