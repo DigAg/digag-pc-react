@@ -58,7 +58,6 @@ export default class LoginDialog extends Component {
         onCancel={ this.props.onClose }
         footer={null}
       >
-
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
             {getFieldDecorator('account', {
