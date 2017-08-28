@@ -2,8 +2,6 @@
  * Created by Yuicon on 2017/6/25.
  */
 import React, {Component} from 'react';
-// import {Button, Dialog, Form, Input, Notification} from "element-react";
-
 import {Form, Icon, Input, Button, Modal, message} from 'antd';
 
 const FormItem = Form.Item;

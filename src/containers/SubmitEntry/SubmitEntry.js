@@ -3,12 +3,16 @@
  * https://github.com/Yuicon
  */
 import React, {Component} from 'react';
-import {Button, Form, Input, Switch} from "element-react";
-import { message } from 'antd';
+import {Form, Icon, Input, Button, message, Switch} from 'antd';
 import {connect} from "react-redux";
 import {createEntryAction} from '../../redux/action/entries';
 import './SubmitEntry.css';
 
+
+const FormItem = Form.Item;
+const createForm = Form.create;
+
+@createForm()
 @connect(
   (state) => {
     return ({
@@ -21,82 +25,79 @@ export default class SubmitEntry extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      form: {
-        title: '',
-        content: '',
-        original: true,
-        originalUrl: null,
-        english: false,
-        type: 'article',
-      },
-    loading: false,
+      loading: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.entries.get('saveSuccess')) {
+    if (nextProps.entries.get('saveSuccess') && !this.props.entries.get('saveSuccess')) {
       message.success('投稿成功');
-      this.setState({form: {
-        title: '',
-        content: '',
-        original: true,
-        originalUrl: null,
-        english: false,
-        type: 'article',
-      }});
+      this.props.form.resetFields();
     } else if (nextProps.entries.get('error')) {
       message.error(nextProps.entries.get('error'));
     }
     this.setState({loading: false});
   }
 
-  handleSubmit = () => {
-    this.props.createEntryAction(this.state.form);
-    this.setState({loading: true});
-  };
-
-  handleChange = (key, value) => {
-    this.setState({
-      user: Object.assign(this.state.form, {[key]: value})
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.createEntryAction(values);
+        this.setState({loading: true});
+      }
     });
   };
 
-  render(){
-    return(
+  render() {
+
+    const {getFieldDecorator} = this.props.form;
+
+    return (
       <div className="SubmitEntry-container">
         <div className="head">
           <h2>推荐文章到掘金</h2>
           <p>感谢分享，文章的审核时间约1-2个工作日</p>
         </div>
         <div className="entry-form">
-          <Form model={this.state.form} labelWidth="80" onSubmit={this.handleSubmit}>
-            <Form.Item label="分享网址">
-              <Input value={this.state.form.originalUrl} onChange={this.handleChange.bind(this, 'originalUrl')}/>
-            </Form.Item>
-            <Form.Item label="标题">
-              <Input value={this.state.form.title} onChange={this.handleChange.bind(this, 'title')}/>
-            </Form.Item>
-            <Form.Item label="描述">
-              <Input value={this.state.form.content} onChange={this.handleChange.bind(this, 'content')}/>
-            </Form.Item>
-            <Form.Item >
-              <Switch
-                value={this.state.form.original}
-                onChange={this.handleChange.bind(this, 'original')}
-                onText="原创"
-                offText="转载">
-              </Switch>
-            </Form.Item>
-            <Form.Item >
-              <Switch
-                value={this.state.form.english}
-                onChange={this.handleChange.bind(this, 'english')}
-                onText="英文"
-                offText="中文">
-              </Switch>
-            </Form.Item>
+
+          <Form onSubmit={this.handleSubmit} className="login-form">
+            <FormItem label="分享网址">
+              {getFieldDecorator('originalUrl', {
+                rules: [{required: true, message: '请输入分享网址'}],
+              })(
+                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="分享网址"/>
+              )}
+            </FormItem>
+            <FormItem label="标题">
+              {getFieldDecorator('title', {
+                rules: [{required: true, message: '请输入标题'}],
+              })(
+                <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>} placeholder="标题"/>
+              )}
+            </FormItem>
+            <FormItem label="描述">
+              {getFieldDecorator('content', {
+                rules: [{required: true, message: '请输入描述'}],
+              })(
+                <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>} placeholder="描述"/>
+              )}
+            </FormItem>
+            <FormItem label="文章类型">
+              {getFieldDecorator('original', {
+                rules: [{required: true, message: '请选择文章类型'}],
+              })(
+                <Switch checkedChildren="原创" unCheckedChildren="转载"/>
+              )}
+            </FormItem>
+            <FormItem label="语言">
+              {getFieldDecorator('english', {
+                rules: [{required: true, message: '请选择语言'}],
+              })(
+                <Switch checkedChildren="英文" unCheckedChildren="中文"/>
+              )}
+            </FormItem>
             <Form.Item >
               <Button type="primary" onClick={this.handleSubmit} loading={this.state.loading}>
                 发布
