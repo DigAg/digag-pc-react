@@ -6,7 +6,7 @@ import {Menu, Input, Icon, Dropdown, message} from 'antd';
 import RegisterDialog from '../../components/Header/RegisterDialog';
 import LoginDialog from '../../components/Header/LoginDialog';
 import {connect} from "react-redux";
-import {registerAction, loginAction} from '../../redux/action/users';
+import {registerAction, loginAction, currentUserAction} from '../../redux/action/users';
 import './Header.css';
 import portrait from '../../assets/images/portrait.jpg';
 
@@ -15,9 +15,10 @@ import portrait from '../../assets/images/portrait.jpg';
     return ({
       users: state.users,
       auth: state.auth,
+      currentUser: state.users.get('currentUser'),
     });
   },
-  {registerActions: registerAction, loginActions: loginAction}
+  {registerActions: registerAction, loginActions: loginAction, currentUserAction: currentUserAction}
 )
 export default class Header extends Component {
 
@@ -28,6 +29,11 @@ export default class Header extends Component {
       registerDialog: false,
       loginDialog: false,
     };
+  }
+
+  componentWillMount() {
+    const token = localStorage.getItem('token');
+    token && this.props.currentUserAction(token);
   }
 
   handleSelect = ({key}) => {
@@ -83,7 +89,7 @@ export default class Header extends Component {
   handleCommand = ({key}) => {
     switch (key) {
       case 'index':
-        console.log(key);
+        this.props.history.push(`/user/${this.props.currentUser.username}`);
         break;
       case 'logout':
         localStorage.removeItem('token');
@@ -96,7 +102,7 @@ export default class Header extends Component {
   };
 
   renderMenu() {
-    if (localStorage.getItem('token')) {
+    if (this.props.currentUser) {
       return [
         <Menu.Item key="edit">
           <Icon type="plus" />
@@ -131,6 +137,7 @@ export default class Header extends Component {
   };
 
   render() {
+
     return (
       <div className="App-header">
         <header className="main-header visible">

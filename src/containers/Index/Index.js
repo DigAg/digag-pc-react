@@ -102,9 +102,9 @@ export default class Index extends Component {
                 </TabPane >
               </Tabs>
             </div>
-            <div className="sidebar">
-              31adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd
-            </div>
+            {/*<div className="sidebar">*/}
+              {/*31adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd1adasdasdasdasdasd*/}
+            {/*</div>*/}
           </div>
         </div>
       </div>

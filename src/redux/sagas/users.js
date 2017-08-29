@@ -14,7 +14,7 @@ export function* currentUserAsync() {
 
   const json = yield call(currentUser, token);
   if (json.success) {
-    yield put(currentUserSuccessAction(true));
+    yield put(currentUserSuccessAction(json.data));
   } else {
     console.log('currentUserAsync', json.error);
     yield put(currentUserFailureAction(json.error));

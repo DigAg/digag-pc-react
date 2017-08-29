@@ -32,9 +32,9 @@ export const users = (state = initialState, action = {}) => {
         'token': action.data,
         'error': null,
       });
-    case CURRENT_USER_FAILURE:
-      return state.set('currentUser', action.data);
     case CURRENT_USER_SUCCESS:
+      return state.set('currentUser', action.data);
+    case CURRENT_USER_FAILURE:
       return state.set('error', action.data);
     default:
       return state
