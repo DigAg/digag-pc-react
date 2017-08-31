@@ -1,7 +1,7 @@
 /**
  * Created by Yuicon on 2017/6/25.
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Menu, Input, Icon, Dropdown, message} from 'antd';
 import RegisterDialog from '../../components/Header/RegisterDialog';
 import LoginDialog from '../../components/Header/LoginDialog';
@@ -20,6 +20,15 @@ import './Header.css';
   {registerActions: registerAction, loginActions: loginAction, currentUserAction: currentUserAction}
 )
 export default class Header extends Component {
+
+  static propTypes = {
+    currentUser: PropTypes.object,
+    users: PropTypes.object,
+    auth: PropTypes.object,
+    registerActions: PropTypes.func,
+    loginActions: PropTypes.func,
+    currentUserAction: PropTypes.func,
+  };
 
   constructor(props) {
     super(props);

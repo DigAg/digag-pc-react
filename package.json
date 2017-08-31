@@ -13,7 +13,8 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.1",
     "redux-saga": "^0.15.4",
-    "antd": "^2.12.7"
+    "antd": "^2.12.7",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",

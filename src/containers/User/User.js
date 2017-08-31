@@ -2,7 +2,7 @@
  * Created by Yuicon on 2017/8/15.
  * https://github.com/Yuicon
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './User.css';
 import {findUserEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
@@ -19,6 +19,14 @@ import Entry from "../../components/Entry/Entry";
   {findUserEntriesAction, likeEntryAction}
 )
 export default class User extends Component {
+
+  static propTypes = {
+    entriesByUser: PropTypes.object,
+    error: PropTypes.string,
+    last: PropTypes.bool,
+    findUserEntriesAction: PropTypes.func,
+    likeEntryAction: PropTypes.func,
+  };
 
   constructor(props) {
     super(props);

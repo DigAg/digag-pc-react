@@ -2,7 +2,7 @@
  * Created by Yuicon on 2017/7/5.
  * https://github.com/Yuicon
  */
-import React, { Component } from 'react';
+import React, { Component , PropTypes} from 'react';
 import './Index.css';
 import {findAllEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
@@ -22,6 +22,14 @@ const TabPane = Tabs.TabPane;
   {findAllEntriesAction, likeEntryAction}
 )
 export default class Index extends Component {
+
+  static propTypes = {
+    entries: PropTypes.object,
+    error: PropTypes.string,
+    last: PropTypes.bool,
+    findAllEntriesAction: PropTypes.func,
+    likeEntryAction: PropTypes.func,
+  };
 
   constructor(props) {
     super(props);

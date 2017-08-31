@@ -2,7 +2,7 @@
  * Created by Yuicon on 2017/7/13.
  * https://github.com/Yuicon
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Form, Icon, Input, Button, message, Switch} from 'antd';
 import {connect} from "react-redux";
 import {createEntryAction} from '../../redux/action/entries';
@@ -22,6 +22,11 @@ const createForm = Form.create;
   {createEntryAction: createEntryAction}
 )
 export default class SubmitEntry extends Component {
+
+  static propTypes = {
+    entries: PropTypes.object,
+    createEntryAction: PropTypes.func,
+  };
 
   constructor(props) {
     super(props);
