@@ -7,7 +7,6 @@ import './User.css';
 import {findUserEntriesAction, likeEntryAction} from '../../redux/action/entries';
 import {connect} from "react-redux";
 import Entry from "../../components/Entry/Entry";
-import portrait from '../../assets/images/portrait.jpg';
 
 @connect(
   (state) => {
@@ -35,7 +34,7 @@ export default class User extends Component {
       <div className="user-main">
         <div className="user-info">
           <div className="user-img">
-            <img src={portrait} alt="头像" className="user-portrait"/>
+            <img src={`https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50`} alt="头像" className="user-portrait"/>
           </div>
           <div className="user-username">
             {this.username}

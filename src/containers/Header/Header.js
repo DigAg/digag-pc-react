@@ -8,7 +8,6 @@ import LoginDialog from '../../components/Header/LoginDialog';
 import {connect} from "react-redux";
 import {registerAction, loginAction, currentUserAction} from '../../redux/action/users';
 import './Header.css';
-import portrait from '../../assets/images/portrait.jpg';
 
 @connect(
   (state) => {
@@ -118,7 +117,7 @@ export default class Header extends Component {
             </Menu>
           )}>
             <div>
-              <img src={portrait} alt="头像" className="portrait"/>
+              <img src={`https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50`} alt="头像" className="portrait"/>
             </div>
           </Dropdown>
         </Menu.Item>]
