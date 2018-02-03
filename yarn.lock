@@ -319,7 +319,7 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
-async-validator@1.x, async-validator@^1.7.1:
+async-validator@1.x:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.7.1.tgz#89d3d7a384ca5d05e0f07bf51754d591e2cfec61"
   dependencies:
@@ -1304,10 +1304,6 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-chain-function@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/chain-function/-/chain-function-1.0.0.tgz#0d4ab37e7e18ead0bdc47b920764118ce58733dc"
-
 chalk@1.1.3, chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-1.1.3.tgz#a8115c55e4a702fe4d150abd3872822a7e09fc98"
@@ -1929,10 +1925,6 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
-dom-helpers@^3.2.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.2.1.tgz#3203e07fed217bd1f424b019735582fc37b2825a"
-
 dom-matches@>=1.0.1:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/dom-matches/download/dom-matches-2.0.0.tgz#d2728b416a87533980eb089b848d253cf23a758c"
@@ -2026,23 +2018,6 @@ ee-first@1.1.1:
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.14:
   version "1.3.14"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.14.tgz#64af0f9efd3c3c6acd57d71f83b49ca7ee9c4b43"
-
-element-react@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/element-react/-/element-react-1.0.11.tgz#51398e00edbd8680be1a0f0b3a60c35622651318"
-  dependencies:
-    async-validator "^1.7.1"
-    classnames "^2.2.5"
-    prop-types "^15.5.10"
-    react "^15.5.4"
-    react-click-outside "^2.3.1"
-    react-dom "^15.5.4"
-    react-transition-group "^1.1.3"
-    throttle-debounce "^1.0.1"
-
-element-theme-default@^1.3.7:
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/element-theme-default/-/element-theme-default-1.3.7.tgz#71a2fc6b743a1c66b26c493014a613959bbcca0e"
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -5358,12 +5333,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-click-outside@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/react-click-outside/-/react-click-outside-2.3.1.tgz#318737ebdf081a4a3bcd46825663674cbe9836eb"
-  dependencies:
-    hoist-non-react-statics "^1.2.0"
-
 react-dev-utils@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-3.0.0.tgz#3677f37718ba0cae892ba9c01fe54d1622e6ef7c"
@@ -5386,7 +5355,7 @@ react-dev-utils@^3.0.0:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@^15.5.4, react-dom@^15.6.1:
+react-dom@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
   dependencies:
@@ -5464,17 +5433,7 @@ react-slick@~0.14.2:
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
 
-react-transition-group@^1.1.3:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.0.tgz#b51fc921b0c3835a7ef7c571c79fc82c73e9204f"
-  dependencies:
-    chain-function "^1.0.0"
-    dom-helpers "^3.2.0"
-    loose-envify "^1.3.1"
-    prop-types "^15.5.6"
-    warning "^3.0.0"
-
-react@^15.5.4, react@^15.6.1:
+react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:
@@ -6310,10 +6269,6 @@ text-table@0.2.0, text-table@~0.2.0:
 throat@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-3.2.0.tgz#50cb0670edbc40237b9e347d7e1f88e4620af836"
-
-throttle-debounce@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-1.0.1.tgz#dad0fe130f9daf3719fdea33dc36a8e6ba7f30b5"
 
 through@^2.3.6:
   version "2.3.8"

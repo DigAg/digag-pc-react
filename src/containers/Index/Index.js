@@ -88,7 +88,14 @@ export default class Index extends Component {
               <Tabs defaultActiveKey="最新">
                 <TabPane  tab={'热门'} key={'热门'}>
                   {
-
+                    this.props.entries.sort((a, b) => {
+                      if (a.createdAt < b.createdAt) { return 1; }
+                      if (a.createdAt > b.createdAt) { return -1; }
+                      if (a.createdAt=== b.createdAt) { return 0; }
+                      return 0;
+                    }).toList().map(entry => {
+                      return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>;
+                    })
                   }
                 </TabPane >
                 <TabPane  tab={'最新'} key={'最新'}>
@@ -105,7 +112,14 @@ export default class Index extends Component {
                 </TabPane >
                 <TabPane  tab={'评论'} key={'评论'}>
                   {
-
+                    this.props.entries.sort((a, b) => {
+                      if (a.createdAt < b.createdAt) { return 1; }
+                      if (a.createdAt > b.createdAt) { return -1; }
+                      if (a.createdAt=== b.createdAt) { return 0; }
+                      return 0;
+                    }).toList().map(entry => {
+                      return <Entry key={entry.id} entry={entry} onClick={this.props.likeEntryAction}/>;
+                    })
                   }
                 </TabPane >
               </Tabs>
